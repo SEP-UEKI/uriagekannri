@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>一覧表示</title>
+<meta charset="utf-8" />
+<style>
+table {
+  border-collapse: collapse;
+}
+.col_id {width: 50px;}
+.col_name {width: 120px;}
+.col_address {width: 230px;}
+.col_tel {width: 150px;}
+</style>
+</head>
+<body>
+<h3>住所録管理システム：住所録一覧</h3>
+<!-- <h2><span th:text="${message}"></span></h2> -->
+🍺
+<form action="/add">
+    <input type="submit" name="newAdd" value="新規登録" style="WIDTH: 250px; HEIGHT: 20px" />
+    <input type="hidden" name="newAddress" value="新規登録">
+</form>
+
+<!--<form th:action="@{/Search}" th:object="${user}" th:method="get">
+	<div  style="position: relative; left: 400px; top: -25px;">
+		住所：<td><input type="text" th:field="*{address}"></td>
+    	<input type="submit"name="search" value="検索"/>
+    </div>
+</form>-->
+
+<table border="1">
+    <tr>
+    	<th bgcolor="#bfefdf" class="col_id">ID</th>
+        <th bgcolor="#bfefdf" class="col_clientname">顧客</th>
+        <th bgcolor="#bfefdf" class="col_day">受注日</th>
+        <th bgcolor="#bfefdf" class="col_snumber">S番号</th>
+        <th bgcolor="#bfefdf" class="col_subject">件名</th>
+        <th bgcolor="#bfefdf" class="col_quantity">数量</th>
+        <th bgcolor="#bfefdf" class="col_deliveryday">納入指定日<br>/納入日</th>
+        <th bgcolor="#bfefdf" class="col_billingday">請求日</th>
+        <th bgcolor="#bfefdf" class="col_money">見積金額<br>/受注金額</th>
+        <th bgcolor="#bfefdf" class="col_status">ステータス</th>
+        <th bgcolor="#bfefdf"></th>
+        <th bgcolor="#bfefdf"></th>
+    </tr>
+    <tr th:each="User : ${users}">
+    	<td th:text="${User.id}"/></td>
+    	<td th:text="${User.clientname}"/></td>
+        <td align="center" th:text="${User.day}"/></td>
+        <td th:text="${User.snumber}"/></td>
+        <td th:text="${User.subject}"/></td>
+        <td align="center" th:text="${User.quantity}"/></td>
+        <td align="center" th:text="${User.deliveryday}"/></td>
+        <td align="center" th:text="${User.billingday}"/></td>
+        <td align="right" th:text="${User.money}"/></td>
+        <td align="center"th:text="${User.status}"/></td>
+        <td>
+		<div>
+            <a th:href="@{/user/{id}/edit(id=${User.id})}" type="button">編集</a>
+    		<a th:href="@{/user/{id}/delete(id=${User.id})}" type="button">削除</a>
+		</div>
+        </td>
+    </tr>
+</table>
+ <div th:fragment='paginationbar'>
+            <ul class='pagination pagination-centered'>
+                <li th:class="${page.firstPage}?'disabled':''" style="display:inline">
+                    <span th:if='${page.firstPage}'>«</span>
+                    <a th:if='${not page.firstPage}' th:href='@{${page.url}(page=0,size=${page.size})}'>«</a>
+                </li>
+                <li th:class="${page.hasPreviousPage}? '' : 'disabled'" style="display:inline">
+                    <span th:if='${not page.hasPreviousPage}'>‹</span>
+                    <a th:if='${page.hasPreviousPage}' th:href='@{${page.url}(page=${page.number-2},size=${page.size})}'>‹</a>
+                </li>
+
+
+                <li th:each='item : ${page.items}' th:class="${item.current}? 'active' : ''" style="display:inline">
+                    <span th:if='${item.current}' th:text='${item.number}'>1</span>
+                    <a th:if='${not item.current}' th:href='@{${page.url}(page=${item.number-1},size=${page.size})}'>
+                    <span th:text='${item.number}'>1</span>
+                    </a>
+                </li>
+                <li th:class="${page.hasNextPage}? '' : 'disabled'" style="display:inline">
+                    <span th:if='${not page.hasNextPage}'>›</span>
+                    <a th:if='${page.hasNextPage}' th:href='@{${page.url}(page=${page.number},size=${page.size})}'>›</a>
+                </li>
+                <li th:class="${page.lastPage}? 'disabled' : ''" style="display:inline">
+                    <span th:if='${page.lastPage}'>»</span>
+                    <a th:if='${not page.lastPage}' th:href='@{${page.url}(page=${page.totalPages - 1},size=${page.size})}'>»</a>
+                </li>
+            </ul>
+        </div>
+<hr>
+<form action="/add">
+    <input type="submit" name="newAdd" value="新規登録" style="WIDTH: 250px; HEIGHT: 20px" />
+    <input type="hidden" name="newAddress" value="新規登録">
+</form>
+</body>
+</html>

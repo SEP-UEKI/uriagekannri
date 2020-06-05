@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>製造部売上管理システム：案件登録</title>
+    <link href="/css/add.css" rel="stylesheet"></link>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <h3>製造部売上管理システム：案件登録</h3>
+    <select th:field="** {client}">
+    <option th:value="'beer'" th:text="ビールシステム"></option>
+    <option th:value="'meizi'" th:text="明治製作所"></option>
+    <option th:value="'abc'" th:text="ABC"></option>
+</select>
+    <form th:action="@{/userC}" th:object="${user}" th:method="get">
+    <table>
+      <tr>
+        <th class="cell_title">受注日</th>
+        <th class="cell_required">：</th>
+        <td><input type="date" th:field="*{day}"></td>
+      </tr>
+      <tr>
+        <th class="cell_title">S番号</th>
+        <th class="cell_required">：</th>
+        <td><input type="text" th:field="*{snumber}"></td>
+      </tr>
+      <tr>
+        <th class="cell_title">件名</th>
+        <th class="cell_required">：</th>
+        <td><input type="text" th:field="*{subject}"></td>
+      </tr>
+      <tr>
+        <th class="cell_title">数量</th>
+        <th class="cell_required">：</th>
+        <td><input type="text" th:field="*{quantity}"></td>
+      </tr>
+      <tr>
+        <th class="cell_title">納入指定日</th>
+        <th class="cell_required">：</th>
+        <td><input type="date" th:field="*{deliveryday}"></td>
+      </tr>
+      <tr>
+        <th class="cell_title">納入日</th>
+        <th class="cell_required">：</th>
+        <td><input type="date" th:field="*{deliveryday2}"></td>
+      </tr>
+      <tr>
+        <th class="cell_title">請求日</th>
+        <th class="cell_required">：</th>
+        <td><input type="date" th:field="*{deliveryday}"></td>
+      </tr>
+      <tr>
+        <th class="cell_title">見積金額</th>
+        <th class="cell_required">：</th>
+        <td><input type="text" th:field="*{money}"></td>
+      </tr>
+      <tr>
+        <th class="cell_title">受注金額</th>
+        <th class="cell_required">：</th>
+        <td><input type="text" th:field="*{money2}"></td>
+      </tr>
+       <select th:field="** {status}">
+    <option th:value="'status'" th:text="請求済み"></option>
+    <option th:value="'status2'" th:text="納入済み"></option>
+    <option th:value="'status3'" th:text="製造着手"></option>
+    <option th:value="'status4'" th:text="受注"></option>
+    <option th:value="'status5'" th:text="見積済み"></option>
+    <option th:value="'status6'" th:text="製造完了"></option>
+</select>
+    </table>
+    <input type="submit" value="確認">
+	<INPUT type="button" onClick='history.back();' value="戻る">
+  </form>
+  </body>
+</html>
