@@ -2,6 +2,9 @@ package com.example.demo;
 
 
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,10 +36,20 @@ public String getAllUsers(@Validated User user,  BindingResult result,
 	return "index";
 	}
 
+private Map<String,String> getSelectedItems(){
+    Map<String, String> selectMap = new LinkedHashMap<String, String>();
+    selectMap.put("key_A", "ビールシステム");
+    selectMap.put("key_B", "明治製作所");
+    selectMap.put("key_C", "ABC");
+    return selectMap;
+	}
 
 @GetMapping(value = "/add")
-	public String displayAdd(Model model) {
+	public String displayAdd(Form form,Model model) {
 	model.addAttribute("user", new User());
+	model.addAttribute("selectItems",getSelectedItems());
 	return "add";
 	}
+
+
 }

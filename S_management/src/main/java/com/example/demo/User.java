@@ -21,10 +21,13 @@ public class User {
     private String subject;
     private String quantity;
     private String deliveryday;
+    private String deliveryday2;
     private String billingday;
     private String money;
+    private String money2;
     private String status;
     private String delete_flg;
+    private String mailadd;
 
     public long getId() {
         return id;
@@ -65,6 +68,12 @@ public class User {
     public String getDeliveryday() {
         return deliveryday;
     }
+    public void setDeliveryday2(String deliveryday2) {
+        this.deliveryday2 = deliveryday2;
+    }
+    public String getDeliveryday2() {
+        return deliveryday2;
+    }
     public void setDeliveryday(String deliveryday) {
         this.deliveryday = deliveryday;
     }
@@ -76,6 +85,12 @@ public class User {
     }
     public String getMoney() {
         return money;
+    }
+    public void setMoney2(String money2) {
+        this.money2 = money2;
+    }
+    public String getMoney2() {
+        return money2;
     }
     public void setMoney(String money) {
         this.money = money;
@@ -91,6 +106,12 @@ public class User {
     }
     public void setDlete_flg(String delete_flg) {
         this.delete_flg = delete_flg;
+    }
+    public String getMailadd() {
+        return mailadd;
+    }
+    public void setMailadd(String mailadd) {
+        this.mailadd = mailadd;
     }
 
 }
