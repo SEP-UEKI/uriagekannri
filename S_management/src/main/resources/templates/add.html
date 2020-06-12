@@ -13,10 +13,13 @@
 			<tr>
 				<th class="cell_title">顧客</th>
 				<th class="cell_required">：</th>
-				<td><div><select id="singleSelect" name="selectedItem">
-     				<option value="">---</option>
-    				<option th:each="item : ${selectItems}" th:value="${item.value}" th:text="${item.value}"> <!--th:selected="${item.value} == *{selectedItem}">singleSelect</option> -->
-					</select></div>
+				<td>
+					<div>
+						<select id="singleSelect" name="selectedItem" th:field="*{clientname}">
+     					<option value="">---</option>
+    					<option th:each="item : ${selectItems}" th:value="${item.value}" th:text="${item.value}"> <!--th:selected="${item.value} == *{selectedItem}">singleSelect</option> -->
+						</select>
+					</div>
 				</td>
 			</tr>
 			<tr>
@@ -52,7 +55,7 @@
 			<tr>
 				<th class="cell_title">請求日</th>
 				<th class="cell_required">：</th>
-				<td><input type="date" th:field="*{deliveryday}"></td>
+				<td><input type="date" th:field="*{billingday}"></td>
 			</tr>
 			<tr>
 				<th class="cell_title">見積金額</th>
@@ -68,7 +71,7 @@
 				<th class="cell_title">ステータス</th>
 				<th class="cell_required">：</th>
 				<td>
-					<select id="singleSelect" name="selectedItem2">
+					<select id="singleSelect" name="selectedItem2" th:field="*{status}">
     			 	<option value="">---</option>
     			 	<option th:each="item : ${selectItems2}" th:value="${item.value}" th:text="${item.value}"> <!--th:selected="${item.value} == *{selectedItem2}">singleSelect</option> -->
 					</select>
@@ -80,10 +83,9 @@
 				<td><textarea name="kansou" rows="4" cols="40"></textarea><br></td>
 			</tr>
 			</table>
-	</form>
-
 		<input type="submit" value="確認">
 		<input type="button"onClick='history.back();' value="戻る">
+		</form>
 
 </body>
 </html>

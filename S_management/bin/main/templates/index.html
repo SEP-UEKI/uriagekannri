@@ -14,9 +14,9 @@ table {
 </style>
 </head>
 <body>
-<h3>住所録管理システム：住所録一覧</h3>
+<h3>製造部売り上げ管理システム:案件一覧</h3>
 <!-- <h2><span th:text="${message}"></span></h2> -->
-🍺
+🍺🐔
 <form action="/add">
     <input type="submit" name="newAdd" value="新規登録" style="WIDTH: 250px; HEIGHT: 20px" />
     <input type="hidden" name="newAddress" value="新規登録">
@@ -44,7 +44,7 @@ table {
         <th bgcolor="#bfefdf"></th>
         <th bgcolor="#bfefdf"></th>
     </tr>
-    <tr th:each="User : ${users}">
+    <tr th:block th:each="User : ${users}">
     	<td th:text="${User.id}"/></td>
     	<td th:text="${User.clientname}"/></td>
         <td align="center" th:text="${User.day}"/></td>
@@ -61,6 +61,7 @@ table {
     		<a th:href="@{/user/{id}/delete(id=${User.id})}" type="button">削除</a>
 		</div>
         </td>
+        </th:block>
     </tr>
 </table>
  <div th:fragment='paginationbar'>

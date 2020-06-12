@@ -104,7 +104,7 @@ public class User {
     public String getDelete_flg() {
         return delete_flg;
     }
-    public void setDlete_flg(String delete_flg) {
+    public void setDelete_flg(String delete_flg) {
         this.delete_flg = delete_flg;
     }
     public String getMailadd() {

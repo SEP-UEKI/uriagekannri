@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>ユーザー削除</title>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <h3>下記住所を削除します。よろしいですか？</h3>
+    <form th:action="@{/userdelete}" th:object="${user}" th:method="post">
+        <table>
+            <tr>
+                <th class="cell_title">顧客</th>
+                <th class="cell_required">:</th>
+                 <td><span th:text="*{clientname}" th:field="*{clientname}"></span></td>
+            </tr>
+           <tr>
+                <th class="cell_title">受注日</th>
+                <th class="cell_required">:</th>
+                <td><span th:text="*{day}" th:field="*{day}"></span></td>
+            </tr>
+             <tr>
+                <th class="cell_title">S番号</th>
+                <th class="cell_required">:</th>
+                <td><span th:text="*{snumber}" th:field="*{snumber}"></span></td>
+            </tr>
+            <tr>
+                <th class="cell_title">件名</th>
+                <th class="cell_required">:</th>
+                <td><span th:text="*{subject}" th:field="*{subject}"></span></td>
+            </tr>
+        </table>
+        <input type="submit"  value="削除" class="btn">
+        <input type="button" onClick='history.back();' value="戻る">
+        <input type="hidden"  th:field="*{id}" th:value="${user.id}">
+        <input type="hidden"  th:field="*{clientname}" th:value="${clientname}">
+        <input type="hidden"  th:field="*{day}" th:value="${day}">
+        <input type="hidden"  th:field="*{snumber}" th:value="${snumber}">
+        <input type="hidden"  th:field="*{subject}" th:value="${subject}">
+    </form>
+  </body>
+</html>
