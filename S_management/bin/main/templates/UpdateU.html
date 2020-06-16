@@ -8,10 +8,10 @@
     <h1>案件編集</h1>
     <form th:action="@{/useredit}" th:object="${user}" th:method="get">
         <table>
-         <tr>
+         	<tr>
                 <th class="cell_title">顧客</th>
                 <th class="cell_required">:</th>
-                 <td><span th:text="*{clientname}" th:field="*{clientname}"></span></td>
+                <td><span th:text="*{clientname}" th:field="*{clientname}"></span></td>
             </tr>
             <tr>
                 <th class="cell_title">受注日</th>
@@ -70,8 +70,19 @@
 			</tr>
         </table>
         <input type="submit"  value="確認" class="btn">
-        <INPUT type="button" onClick='history.back();' value="戻る">
+        <input type="button" onClick='history.back();' value="戻る">
         <input type="hidden" name="id" th:value="${user.id}">
+       <!-- <input type="hidden"  th:field="*{clientname}" th:value="${clientname}">
+        <input type="hidden"  th:field="*{day}" th:value="${day}">
+        <input type="hidden"  th:field="*{snumber}" th:value="${snumber}">
+        <input type="hidden"  th:field="*{subject}" th:value="${subject}">
+        <input type="hidden"  th:field="*{quantity}" th:value="${quantity}">
+        <input type="hidden"  th:field="*{deliveryday}" th:value="${deliveryday}">
+        <input type="hidden"  th:field="*{deliveryday2}" th:value="${deliveryday2}">
+        <input type="hidden"  th:field="*{billingday}" th:value="${billingday}">
+        <input type="hidden"  th:field="*{money}" th:value="${money}">
+        <input type="hidden"  th:field="*{money2}" th:value="${money2}">
+        <input type="hidden"  th:field="*{status}" th:value="${status}">-->
         </form>
   </body>
 </html>

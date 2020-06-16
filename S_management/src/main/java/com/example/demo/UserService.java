@@ -47,6 +47,7 @@ public class UserService {
 		Cuser.setMoney2(user.getDay());
 		Cuser.setStatus(user.getStatus());
 		Cuser.setDelete_flg("0");
+		Cuser.setMailadd("ueki@takuya.co.jp");
 	    userRepository.save(Cuser);
 	  }
 
@@ -66,7 +67,7 @@ public class UserService {
     public void update(User user) {
         User user2 = findById(user.getId());
 
-        user2.setClientname("Clientname");
+        user2.setClientname(user.getClientname());
         user2.setDay(user.getDay());
         user2.setSnumber(user.getSnumber());
         user2.setSubject(user.getSubject());

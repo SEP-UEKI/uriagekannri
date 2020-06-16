@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>ログイン</title>
+<link href="/css/add.css" rel="stylesheet"></link>
+<meta charset="utf-8" />
+</head>
+<body>
+<div class="box">
+   <h1>ログインフォーム</h1>
+   <form role="form" id="login" th:action="@{/login}" method="post">
+        <div th:if="${iserror}" style="color:red;">
+            <p>ログインできませんでした。やりなおしてください。</p>
+        </div>
+        <p>ユーザネーム</p>
+        <input type="text" id="username" name="username" autofocus="autofocus" />
+        <p>メールアドレス</p>
+        <input type="text" id="pmailadd" name="mailadd" /><br/>
+        <button type="submit">ログイン</button>
+   </form>
+</div>
+</body>
+</html>
