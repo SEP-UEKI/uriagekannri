@@ -9,16 +9,24 @@
 <body>
 <div class="box">
    <h1>ログインフォーム</h1>
-   <form role="form" id="login" th:action="@{/login}" method="post">
-        <div th:if="${iserror}" style="color:red;">
+	<form th:action="@{/login}" th:object="${user}" method="GET">
+ 		<table>
+        <!--<div th:if="${iserror}" style="color:red;">
             <p>ログインできませんでした。やりなおしてください。</p>
-        </div>
-        <p>ユーザネーム</p>
-        <input type="text" id="username" name="username" autofocus="autofocus" />
-        <p>メールアドレス</p>
-        <input type="text" id="pmailadd" name="mailadd" /><br/>
-        <button type="submit">ログイン</button>
-   </form>
+        </div>-->
+ 			<tr>
+				<th class="cell_title">名前</th>
+				<th class="cell_required">：</th>
+				<!--<td><input type="text" th:field="*{name}"></td>-->
+			</tr>
+			<tr>
+				<th class="cell_title">メールアドレス</th>
+				<th class="cell_required">：</th>
+				<!--<td><input type="text" th:field="*{mailadd}"></td>-->
+			</tr>
+		</table>
+			 <input type="submit"  value="ログイン">
+	</form>
 </div>
 </body>
 </html>

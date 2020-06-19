@@ -18,6 +18,12 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 
+	public Page<User2> SearchUser2(String Logind,Pageable pageable) {
+		Page<User2> logindata = userRepository.findAllbyfreeword(Logind,pageable);
+
+	    return logindata;
+	}
+
 	/**
 	* ユーザー情報 全検索
 	* @return 検索結果s

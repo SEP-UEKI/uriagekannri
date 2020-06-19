@@ -26,6 +26,24 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
+	 @RequestMapping(value = "/", method = RequestMethod.GET)
+	    public String helloWorld(Model model) {
+		 return "login";
+	    }
+
+
+	 @RequestMapping(value = "/login", method = RequestMethod.GET)
+		public String loginform(User user,@Validated User2 user2, BindingResult result,
+				Pageable pageable,Model model) {
+
+		 String Logind;
+		 Logind = user.getMailadd();
+
+		 	Page<User2> logindata = userService.SearchUser2(Logind,pageable);
+			model.addAttribute("logindata", logindata);
+			return "loginpage";
+		}
+
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public String getAllUsers(@Validated User user, BindingResult result,
 			@PageableDefault(size = 10) Pageable pageable,
