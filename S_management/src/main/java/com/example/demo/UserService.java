@@ -50,7 +50,7 @@ public class UserService {
 		Cuser.setDeliveryday2(user.getDeliveryday2());
 		Cuser.setBillingday(user.getBillingday());
 		Cuser.setMoney(user.getMoney());
-		Cuser.setMoney2(user.getDay());
+		Cuser.setMoney2(user.getMoney2());
 		Cuser.setStatus(user.getStatus());
 		Cuser.setDelete_flg("0");
 		Cuser.setMailadd("ueki@takuya.co.jp");
@@ -82,7 +82,7 @@ public class UserService {
         user2.setDeliveryday2(user.getDeliveryday2());
         user2.setBillingday(user.getBillingday());
         user2.setMoney(user.getMoney());
-        user2.setMoney2(user.getDay());
+        user2.setMoney2(user.getMoney2());
         user2.setStatus(user.getStatus());
         user2.setDelete_flg("0");
         userRepository.save(user2);

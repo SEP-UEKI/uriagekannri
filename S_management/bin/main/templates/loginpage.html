@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>ログイン</title>
+<link href="/css/add.css" rel="stylesheet"></link>
+<meta charset="utf-8" />
+</head>
+<body>
+   <h1>ログインフォーム</h1>
+	<form th:action="@{/all}" th:object="${user}" method="get">
+		<table>
+			<h2>ログイン成功！</h2>
+			<tr th:block th:each="User : ${logindata}">
+				<td> <h2>ようこそ</h2></td>
+				<td align="center" th:text="${User.name}"/>さん</td>
+			 </tr>
+			</th:block>
+		</table>
+		<input type="submit"  value="案件一覧へ">
+		<input type="hidden"  th:field="*{name}" th:value="${name}">
+		<input type="hidden"  th:field="*{mailadd}" th:value="${mailadd}">
+	</form>
+</body>
+</html>

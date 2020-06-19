@@ -7,26 +7,24 @@
 <meta charset="utf-8" />
 </head>
 <body>
-<div class="box">
    <h1>ログインフォーム</h1>
-	<form th:action="@{/login}" th:object="${user}" method="GET">
+	<form th:action="@{/login}" th:object="${user}" method="get">
  		<table>
-        <!--<div th:if="${iserror}" style="color:red;">
+        <div th:if="${loginmiss == 0}" style="color:red;">
             <p>ログインできませんでした。やりなおしてください。</p>
-        </div>-->
+        </div>
  			<tr>
 				<th class="cell_title">名前</th>
 				<th class="cell_required">：</th>
-				<!--<td><input type="text" th:field="*{name}"></td>-->
+				<td><input type="text"></td>
 			</tr>
 			<tr>
 				<th class="cell_title">メールアドレス</th>
 				<th class="cell_required">：</th>
-				<!--<td><input type="text" th:field="*{mailadd}"></td>-->
+				<td><input type="email" th:field="*{mailadd}" required></td>
 			</tr>
 		</table>
 			 <input type="submit"  value="ログイン">
 	</form>
-</div>
 </body>
 </html>

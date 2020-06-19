@@ -26,12 +26,26 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
+
+	/**
+	 * 初期画面
+	 * @param user リクエストデータ
+	 * @param model Model
+	 * @return ログイン画面
+	 */
 	 @RequestMapping(value = "/", method = RequestMethod.GET)
-	    public String helloWorld(Model model) {
+	    public String startview(Model model) {
+		 model.addAttribute("user", new User());
 		 return "login";
 	    }
 
 
+	 /**
+	 * ログイン成否画面を表示
+	 * @param user リクエストデータ
+	 * @param model Model
+	 * @return ログイン成否画面
+	 */
 	 @RequestMapping(value = "/login", method = RequestMethod.GET)
 		public String loginform(User user,@Validated User2 user2, BindingResult result,
 				Pageable pageable,Model model) {
@@ -40,10 +54,26 @@ public class UserController {
 		 Logind = user.getMailadd();
 
 		 	Page<User2> logindata = userService.SearchUser2(Logind,pageable);
+		 	int loginnum;
+		 	loginnum =logindata.getSize();
+		 	if(loginnum ==0) {
+		 	model.addAttribute("loginmiss", 0);
+		 	return "redirect:/login";
+
+		 	}else {
 			model.addAttribute("logindata", logindata);
 			return "loginpage";
+		 	}
 		}
 
+
+
+		/**
+		 * 一覧表示画面表示
+		 * @param user リクエストデータ
+		 * @param model Model
+		 * @return 一覧表示画面
+		 */
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public String getAllUsers(@Validated User user, BindingResult result,
 			@PageableDefault(size = 10) Pageable pageable,
@@ -56,6 +86,12 @@ public class UserController {
 		return "index";
 	}
 
+
+
+	/**
+	 * プルダウンvalue
+	 * @return それぞれ
+	 */
 	private Map<String,String> getSelectedItems(){
 	    Map<String, String> selectMap = new LinkedHashMap<String, String>();
 	    selectMap.put("key_A", "ビールシステム");
@@ -76,6 +112,14 @@ public class UserController {
 		return selectMap;
 	}
 
+
+
+	/**
+	 * 新規登録画面表示
+	 * @param user リクエストデータ
+	 * @param model Model
+	 * @return 新規登録画面表示
+	 */
 	@GetMapping(value = "/add")
 	public String displayAdd(Form form, Form2 form2,Model model) {
 		model.addAttribute("user", new User());

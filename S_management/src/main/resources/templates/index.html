@@ -37,9 +37,11 @@ table {
         <th bgcolor="#bfefdf" class="col_snumber">S番号</th>
         <th bgcolor="#bfefdf" class="col_subject">件名</th>
         <th bgcolor="#bfefdf" class="col_quantity">数量</th>
-        <th bgcolor="#bfefdf" class="col_deliveryday">納入指定日<br>/納入日</th>
+        <th bgcolor="#bfefdf" class="col_deliveryday">納入指定日</th>
+        <th bgcolor="#bfefdf" class="col_deliveryday2">納入日</th>
         <th bgcolor="#bfefdf" class="col_billingday">請求日</th>
-        <th bgcolor="#bfefdf" class="col_money">見積金額<br>/受注金額</th>
+        <th bgcolor="#bfefdf" class="col_money">見積金額</th>
+        <th bgcolor="#bfefdf" class="col_money2">受注金額</th>
         <th bgcolor="#bfefdf" class="col_status">ステータス</th>
         <th bgcolor="#bfefdf"></th>
         <th bgcolor="#bfefdf"></th>
@@ -52,8 +54,10 @@ table {
         <td th:text="${User.subject}"/></td>
         <td align="center" th:text="${User.quantity}"/></td>
         <td align="center" th:text="${User.deliveryday}"/></td>
+        <td align="center" th:text="${User.deliveryday2}"/></td>
         <td align="center" th:text="${User.billingday}"/></td>
         <td align="right" th:text="${User.money}"/></td>
+        <td align="right" th:text="${User.money2}"/></td>
         <td align="center"th:text="${User.status}"/></td>
         <td>
 		<div>
