@@ -54,16 +54,18 @@ public class UserController {
 		 Logind = user.getMailadd();
 
 		 	Page<User2> logindata = userService.SearchUser2(Logind,pageable);
-		 	int loginnum;
-		 	loginnum =logindata.getSize();
-		 	if(loginnum ==0) {
-		 	model.addAttribute("loginmiss", 0);
-		 	return "redirect:/login";
+		 	//int loginnum;
+		 	//loginnum =logindata.getSize();
+		 	String loginnum;
+		 	loginnum =user2.getName();
+		 	//if(loginnum.equals(null)) {
+		 	//model.addAttribute("loginmiss", 0);
+		 	//return "login";
 
-		 	}else {
+		 	//}else {
 			model.addAttribute("logindata", logindata);
 			return "loginpage";
-		 	}
+		 	//}
 		}
 
 
