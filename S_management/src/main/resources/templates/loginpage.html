@@ -8,7 +8,7 @@
 </head>
 <body>
    <h1>ログインフォーム</h1>
-	<form th:action="@{/all}" th:object="${user}" method="get">
+	<form th:action="@{/all}" th:object="${user}" method="get" path="logindata">
 		<table>
 			<h3>ログイン成功！</h3>
 			<tr th:block th:each="User : ${logindata}">

@@ -47,7 +47,7 @@ public class UserController {
 	 * @return ログイン成否画面
 	 */
 	 @RequestMapping(value = "/login", method = RequestMethod.GET)
-		public String loginform(User user,@Validated User2 user2, BindingResult result,
+		public String loginform(@ModelAttribute User user,@Validated User2 user2, BindingResult result,
 				Pageable pageable,Model model) {
 
 		 String Logind;
@@ -56,8 +56,8 @@ public class UserController {
 		 	Page<User2> logindata = userService.SearchUser2(Logind,pageable);
 		 	//int loginnum;
 		 	//loginnum =logindata.getSize();
-		 	String loginnum;
-		 	loginnum =user2.getName();
+		 	//String loginnum;
+		 	//loginnum =user2.getName();
 		 	//if(loginnum.equals(null)) {
 		 	//model.addAttribute("loginmiss", 0);
 		 	//return "login";
