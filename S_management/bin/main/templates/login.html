@@ -9,14 +9,14 @@
 <body>
    <h1>ログインフォーム</h1>
    		<div th:if="${loginmiss == 0}" style="color:red;">
-            <p>ログインできませんでした。やりなおしてください。</p>
+            <p>ログインできませんでした。入力しなおしてください。</p>
         </div>
-	<form th:action="@{/login}" th:object="${user}" method="get">
+	<form th:action="@{/login}" th:object="${user2}" method="get">
  		<table>
  			<tr>
 				<th class="cell_title">名前</th>
 				<th class="cell_required">：</th>
-				<td><input type="text"></td>
+				<td><input type="text" th:field="*{name}"></td>
 			</tr>
 			<tr>
 				<th class="cell_title">メールアドレス</th>

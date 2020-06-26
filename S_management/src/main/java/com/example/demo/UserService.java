@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +19,11 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private UserRepository2 userRepository2;
 
-	public Page<User2> SearchUser2(String Logind,Pageable pageable) {
-		Page<User2> logindata = userRepository.findAllbyfreeword(Logind,pageable);
+	public List<User2> SearchUser2(String Logind,Pageable pageable) {
+		List<User2> logindata = userRepository2.findAllbyfreeword(Logind,pageable);
 
 	    return logindata;
 	}

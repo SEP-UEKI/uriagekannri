@@ -8,18 +8,19 @@
 </head>
 <body>
    <h1>ログインフォーム</h1>
-	<form th:action="@{/all}" th:object="${user}" method="get">
+	<form th:action="@{/all}" th:object="${user2}" method="get" path="logindata">
+	<div>
 		<table>
-			<h3>ログイン成功！</h3>
-			<tr th:block th:each="User : ${logindata}">
+		<h3>ログイン成功！</h3>
+			<tr>
 				<td>ようこそ</td>
-				<td align="center" th:text="${User.name}"/></td>
+				<td align="center" th:text="${user2.name}" /></td>
 				<td>さん</td>
 			 </tr>
-			</th:block>
 		</table>
+		</div>
 		<input type="submit"  value="案件一覧へ">
-		<!--<input type="hidden"  th:field="*{name}" th:value="${name}">-->
+		<input type="hidden"  th:field="*{name}" th:value="${name}">
 		<input type="hidden"  th:field="*{mailadd}" th:value="${mailadd}">
 	</form>
 </body>

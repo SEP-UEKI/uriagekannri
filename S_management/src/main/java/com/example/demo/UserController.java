@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class UserController {
 	 */
 	 @RequestMapping(value = "/", method = RequestMethod.GET)
 	    public String startview(Model model) {
-		 model.addAttribute("user", new User());
+		 model.addAttribute("user2", new User2());
 		 return "login";
 	    }
 
@@ -47,18 +48,18 @@ public class UserController {
 	 * @return ログイン成否画面
 	 */
 	 @RequestMapping(value = "/login", method = RequestMethod.GET)
-		public String loginform(User user,@Validated User2 user2, BindingResult result,
+		public String loginform(@ModelAttribute User user,@Validated User2 user2, BindingResult result,
 				Pageable pageable,Model model) {
 
 		 String Logind;
-		 Logind = user.getMailadd();
+		 Logind = user2.getMailadd();
+		 	List<User2> logindata = userService.SearchUser2(Logind,pageable);
+		 	int loginnum;
+		 	//List<String> list = new ArrayList<String>(Arrays.asList("name"));
 
-		 	Page<User2> logindata = userService.SearchUser2(Logind,pageable);
-		 	//int loginnum;
-		 	//loginnum =logindata.getSize();
-		 	String loginnum;
-		 	loginnum =user2.getName();
-		 	if(loginnum.equals(null)) {
+		 	loginnum=listsize;
+		 	//loginnum =logindata.getName();
+		 	if(loginnum == 0) {
 		 	model.addAttribute("loginmiss", 0);
 		 	return "login";
 
@@ -77,7 +78,7 @@ public class UserController {
 		 * @return 一覧表示画面
 		 */
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public String getAllUsers(@Validated User user, BindingResult result,
+	public String getAllUsers(@Validated User user, @Validated User2 user2,BindingResult result,
 			@PageableDefault(size = 10) Pageable pageable,
 			Model model) {
 
