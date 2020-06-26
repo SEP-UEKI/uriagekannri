@@ -58,14 +58,14 @@ public class UserController {
 		 	//loginnum =logindata.getSize();
 		 	String loginnum;
 		 	loginnum =user2.getName();
-		 	//if(loginnum.equals(null)) {
-		 	//model.addAttribute("loginmiss", 0);
-		 	//return "login";
+		 	if(loginnum.equals(null)) {
+		 	model.addAttribute("loginmiss", 0);
+		 	return "login";
 
-		 	//}else {
+		 	}else {
 			model.addAttribute("logindata", logindata);
 			return "loginpage";
-		 	//}
+		 	}
 		}
 
 
