@@ -54,12 +54,10 @@ public class UserController {
 		 String Logind;
 		 Logind = user2.getMailadd();
 		 	List<User2> logindata = userService.SearchUser2(Logind,pageable);
-		 	int loginnum;
-		 	//List<String> list = new ArrayList<String>(Arrays.asList("name"));
-
-		 	loginnum=listsize;
+		 	//List<User2> list = new ArrayList<User2>();
+		 	if(logindata.size()== 0) {
 		 	//loginnum =logindata.getName();
-		 	if(loginnum == 0) {
+		 	//if(loginnum == 0) {
 		 	model.addAttribute("loginmiss", 0);
 		 	return "login";
 
