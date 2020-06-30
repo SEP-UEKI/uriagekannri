@@ -15,8 +15,14 @@ table {
 </head>
 <body>
 <h3>製造部売り上げ管理システム:案件一覧</h3>
-<!-- <h2><span th:text="${message}"></span></h2> -->
-🍺🐔🏠
+<table>
+	<tr>
+		<td>ようこそ</td>
+		<td><span th:text="${loginusers}"></span></td>
+		<td>さん</td>
+	</tr>
+</table>
+🍺🐔🏠🔥
 
 <form action="/add">
     <input type="submit" name="newAdd" value="新規登録" style="WIDTH: 250px; HEIGHT: 20px" />
@@ -29,17 +35,6 @@ table {
     	<input type="submit"name="search" value="検索"/>
     </div>
 </form>-->
-
-
-	<!--<table border="1">
-		<tr th:block th:each="User : ${users}">
-			<td>ようこそ</td>
-			<td align="center" th:text="${User.name}" /></td>
-			<td>さん</td>
-		</tr>
-		</th:block>
-		</table>-->
-
 
 <table border="1">
     <tr>

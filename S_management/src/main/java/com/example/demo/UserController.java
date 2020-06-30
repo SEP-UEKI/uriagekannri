@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +28,8 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
+	List<User2> logindata = new ArrayList<User2>();
+
 
 	/**
 	 * 初期画面
@@ -52,15 +55,14 @@ public class UserController {
 				Pageable pageable,Model model) {
 
 		 String Logind;
+		 String Loginname;
 		 Logind = user2.getMailadd();
-		 	List<User2> logindata = userService.SearchUser2(Logind,pageable);
-		 	//List<User2> list = new ArrayList<User2>();
-		 	if(logindata.size()== 0) {
+		 Loginname = user2.getName();
+		 	List<User2> logindata = userService.SearchUser2(Loginname,Logind,pageable);
 
-		 	//loginnum =logindata.getName();
-		 	//if(loginnum == 0) {
+		 	if(logindata == null || logindata.size() == 0) {
 		 	model.addAttribute("loginmiss", 0);
-		 	return "login";printlin
+		 	return "login";
 
 		 	}else {
 			model.addAttribute("logindata", logindata);
@@ -81,10 +83,17 @@ public class UserController {
 			@PageableDefault(size = 10) Pageable pageable,
 			Model model) {
 
+		String Logname;
+		String Logmail;
+		Logname = user2.getName();
+		Logmail = user2.getMailadd();
+
+
 		Page<User> wordPage = userService.searchUser(pageable);
 		PageWrapper<User> page = new PageWrapper<User>(wordPage, "/all");
 		model.addAttribute("page", page);
 		model.addAttribute("users", page.getContent());
+		model.addAttribute("loginusers", Logname);
 		return "index";
 	}
 

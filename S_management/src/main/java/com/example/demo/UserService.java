@@ -22,8 +22,8 @@ public class UserService {
 	@Autowired
 	private UserRepository2 userRepository2;
 
-	public List<User2> SearchUser2(String Logind,Pageable pageable) {
-		List<User2> logindata = userRepository2.findAllbyfreeword(Logind,pageable);
+	public List<User2> SearchUser2(String Loginname,String Logind,Pageable pageable) {
+		List<User2> logindata = userRepository2.findAllbyfreeword(Loginname,Logind,pageable);
 
 	    return logindata;
 	}
