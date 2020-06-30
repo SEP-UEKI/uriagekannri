@@ -89,7 +89,7 @@ public class UserController {
 		Logmail = user2.getMailadd();
 
 
-		Page<User> wordPage = userService.searchUser(pageable);
+		Page<User> wordPage = userService.searchUser(Logmail,pageable);
 		PageWrapper<User> page = new PageWrapper<User>(wordPage, "/all");
 		model.addAttribute("page", page);
 		model.addAttribute("users", page.getContent());

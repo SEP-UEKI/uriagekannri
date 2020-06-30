@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 
 	@Repository
 	public interface UserRepository extends JpaRepository<User, Long> {
-		@Query(value = "SELECT * FROM sales_management WHERE delete_flg = 0",nativeQuery = true)
-			Page<User> findAllByFreeWord(Pageable pageable);
+		@Query(value = "SELECT * FROM sales_management WHERE delete_flg = 0 AND mailadd = :freeWord",nativeQuery = true)
+			Page<User> findAllByFreeWord(@Param("freeWord") String Logmail,Pageable pageable);
 
 		@Query(value = "SELECT * FROM sales_management WHERE address LIKE %:freeWord% AND delete_flg = 0",nativeQuery = true)
 			Page<User> findAllByFreeword(@Param("freeWord") String Searchinf, Pageable pageable);
