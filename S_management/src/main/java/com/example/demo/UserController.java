@@ -56,10 +56,11 @@ public class UserController {
 		 	List<User2> logindata = userService.SearchUser2(Logind,pageable);
 		 	//List<User2> list = new ArrayList<User2>();
 		 	if(logindata.size()== 0) {
+
 		 	//loginnum =logindata.getName();
 		 	//if(loginnum == 0) {
 		 	model.addAttribute("loginmiss", 0);
-		 	return "login";
+		 	return "login";printlin
 
 		 	}else {
 			model.addAttribute("logindata", logindata);
