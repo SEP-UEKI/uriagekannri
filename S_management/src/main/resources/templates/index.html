@@ -29,12 +29,13 @@ table {
     <input type="hidden" name="newAddress" value="新規登録">
 </form>
 
-<!--<form th:action="@{/Search}" th:object="${user}" th:method="get">
+<form th:action="@{/Search}" th:object="${user}" th:method="get">
 	<div  style="position: relative; left: 400px; top: -25px;">
-		住所：<td><input type="text" th:field="*{address}"></td>
+		件名：<td><input type="text" th:field="*{subject}"></td>
     	<input type="submit"name="search" value="検索"/>
+    	 <input type="hidden" name="mailadd" th:value="$loginmail}">
     </div>
-</form>-->
+</form>
 
 <table border="1">
     <tr>

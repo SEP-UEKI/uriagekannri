@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 		@Query(value = "SELECT * FROM sales_management WHERE delete_flg = 0 AND mailadd = :freeWord",nativeQuery = true)
 			Page<User> findAllByFreeWord(@Param("freeWord") String Logmail,Pageable pageable);
 
-		@Query(value = "SELECT * FROM sales_management WHERE address LIKE %:freeWord% AND delete_flg = 0",nativeQuery = true)
-			Page<User> findAllByFreeword(@Param("freeWord") String Searchinf, Pageable pageable);
+		@Query(value = "SELECT * FROM sales_management WHERE subject LIKE %:freeWord% AND delete_flg = 0 AND mailadd = :FreeWord ",nativeQuery = true)
+			Page<User> findAllByFreeword(@Param("FreeWord") String MailInf,@Param("freeWord") String Searchinf, Pageable pageable);
 	}
 

@@ -30,12 +30,26 @@ public class UserService {
 
 	/**
 	* ユーザー情報 全検索
-	* @return 検索結果s
+	* @return 検索結果
 	*/
 	public Page<User> searchUser(String Logmail,Pageable pageable) {
 		  Page<User> wordPage = userRepository.findAllByFreeWord(Logmail,pageable);
 	    return wordPage;
 	  }
+
+
+	/**
+	* ユーザー情報 検索
+	* @return 検索結果
+	*/
+	public Page<User> SearchUserCriteria(String MailInf,String Searchinf,Pageable pageable) {
+
+
+	    Page<User> wordPage = userRepository.findAllByFreeword(MailInf,Searchinf, pageable);
+
+	    return wordPage;
+	}
+
 
 
 	  /**

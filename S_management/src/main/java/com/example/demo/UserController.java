@@ -94,7 +94,30 @@ public class UserController {
 		model.addAttribute("page", page);
 		model.addAttribute("users", page.getContent());
 		model.addAttribute("loginusers", Logname);
+		model.addAttribute("loginmail", Logmail);
 		return "index";
+	}
+
+
+	/**
+	* ユーザー情報 検索
+	* @return 検索結果
+	*/
+	@RequestMapping(value = "/Search", method = RequestMethod.GET)
+	public String getSearchUsers(User user,@Validated UserCriteria usercriteria,  BindingResult result,
+								  @PageableDefault(size = 10) Pageable pageable,
+								  Model model) {
+		String Searchinf;
+		String MailInf;
+		Searchinf = user.getSubject();
+		MailInf = user.getMailadd();
+
+
+		Page<User> wordPage = userService.SearchUserCriteria(MailInf,Searchinf,pageable);
+		PageWrapper<User> page = new PageWrapper<User>(wordPage, "/all");
+		model.addAttribute("page", page);
+		model.addAttribute("users", page.getContent());
+		return"index";
 	}
 
 
