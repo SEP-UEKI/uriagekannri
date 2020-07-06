@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 /**
@@ -38,14 +39,23 @@ public class UserService {
 	  }
 
 
+
 	/**
 	* ユーザー情報 検索
 	* @return 検索結果
 	*/
-	public Page<User> SearchUserCriteria(String Gstatus,String Gclientname,String MailInf,String Searchinf,Pageable pageable) {
+	public Page<User> SearchUserCriteria(int delete_flg,String Gstatus,String Gclientname,String MailInf,String Searchinf,Pageable pageable) {
 
 
-	    Page<User> wordPage = userRepository.findAllByFreeword(Gstatus,Gclientname,MailInf,Searchinf, pageable);
+		Specification<User>spec = Specification.where(CustomerSpecs.subjectEquals(Searchinf))
+    			.and(CustomerSpecs.clientnameEquals(Gclientname))
+    			.and(CustomerSpecs.statusEquals(Gstatus))
+				.and(CustomerSpecs.MailInfEquals(MailInf))
+				.and(CustomerSpecs.deleteflgEquals(0));
+    	Page<User> wordPage = userRepository.findAll(spec,pageable);
+
+
+	    //Page<User> wordPage = userRepository.findAllByFreeword(Gstatus,Gclientname,MailInf,Searchinf, pageable);
 
 	    return wordPage;
 	}

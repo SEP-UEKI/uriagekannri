@@ -111,23 +111,17 @@ public class UserController {
 		String MailInf;
 		String Gclientname;
 		String Gstatus;
+		int delete_flg;
 
 
 		Searchinf = user.getSubject();
 		MailInf = user.getMailadd();
 		Gclientname = user.getClientname();
-			if(Gclientname =="beer") {
-				Gclientname ="";
-			}else {
-			}
 		Gstatus = user.getStatus();
-			if(Gstatus =="beer") {
-				Gstatus ="";
-			}else {
-			}
+		delete_flg = 0;
 
 
-		Page<User> wordPage = userService.SearchUserCriteria(Gstatus,Gclientname,MailInf,Searchinf,pageable);
+		Page<User> wordPage = userService.SearchUserCriteria(delete_flg,Gstatus,Gclientname,MailInf,Searchinf,pageable);
 		PageWrapper<User> page = new PageWrapper<User>(wordPage, "/all");
 		model.addAttribute("page", page);
 		model.addAttribute("users", page.getContent());

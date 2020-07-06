@@ -33,24 +33,24 @@ table {border-collapse: collapse;}
 
 		<p>顧客：</p>
 		<select name="clientname" th:field="*{clientname}">
-			<option value="beer" selected="selected" class="msg">顧客</option>
-			<option value="beer" class="beer">ビールシステム</option>
-			<option value="meiji" class="meiji">明治製作所</option>
-			<option value="abc" class="abc">ABC</option>
+			<option value="client" selected="selected" class="msg">顧客</option>
+			<option value="ビールシステム" class="beer">ビールシステム</option>
+			<option value="明治製作所" class="meiji">明治製作所</option>
+			<option value="ABC" class="abc">ABC</option>
 		</select>
 
 		<p>ステータス:</p>
 		<select name="status" th:field="*{status}">
 			<option value="beer" selected="selected" class="msg">ステータス</option>
-			<option value="seikyuu" class="beer">請求済み</option>
-			<option value="nounyuu" class="beer">納入済み</option>
-			<option value="seizou" class="beer">製造着手</option>
-			<option value="zyutyuu" class="beer">受注</option>
-			<option value="mitumori" class="beer">見積済み</option>
-			<option value="seikyuu" class="meiji">請求済み</option>
-			<option value="seizou" class="meiji">製造完了</option>
-			<option value="seikyuu" class="abc">請求済み</option>
-			<option value="seizou" class="abc">製造着手</option>
+			<option value="請求済み" class="beer">請求済み</option>
+			<option value="納入済み" class="beer">納入済み</option>
+			<option value="製造着手" class="beer">製造着手</option>
+			<option value="受注" class="beer">受注</option>
+			<option value="見積済み" class="beer">見積済み</option>
+			<option value="請求済み" class="meiji">請求済み</option>
+			<option value="製造完了" class="meiji">製造完了</option>
+			<option value="請求済み" class="abc">請求済み</option>
+			<option value="製造完了" class="abc">製造完了</option>
 		</select>
 	<script>
 	$(function() {
