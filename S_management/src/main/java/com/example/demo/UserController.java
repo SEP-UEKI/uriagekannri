@@ -104,16 +104,30 @@ public class UserController {
 	* @return 検索結果
 	*/
 	@RequestMapping(value = "/Search", method = RequestMethod.GET)
-	public String getSearchUsers(User user,@Validated UserCriteria usercriteria,  BindingResult result,
+	public String getSearchUsers(User user,@Validated UserCriteria usercriteria,BindingResult result,
 								  @PageableDefault(size = 10) Pageable pageable,
 								  Model model) {
 		String Searchinf;
 		String MailInf;
+		String Gclientname;
+		String Gstatus;
+
+
 		Searchinf = user.getSubject();
 		MailInf = user.getMailadd();
+		Gclientname = user.getClientname();
+			if(Gclientname =="beer") {
+				Gclientname ="";
+			}else {
+			}
+		Gstatus = user.getStatus();
+			if(Gstatus =="beer") {
+				Gstatus ="";
+			}else {
+			}
 
 
-		Page<User> wordPage = userService.SearchUserCriteria(MailInf,Searchinf,pageable);
+		Page<User> wordPage = userService.SearchUserCriteria(Gstatus,Gclientname,MailInf,Searchinf,pageable);
 		PageWrapper<User> page = new PageWrapper<User>(wordPage, "/all");
 		model.addAttribute("page", page);
 		model.addAttribute("users", page.getContent());

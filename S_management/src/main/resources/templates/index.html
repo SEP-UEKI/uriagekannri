@@ -2,11 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>一覧表示</title>
+<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
 <meta charset="utf-8" />
 <style>
-table {
-  border-collapse: collapse;
-}
+table {border-collapse: collapse;}
 .col_id {width: 50px;}
 .col_name {width: 120px;}
 .col_address {width: 230px;}
@@ -29,11 +28,74 @@ table {
     <input type="hidden" name="newAddress" value="新規登録">
 </form>
 
-<form th:action="@{/Search}" th:object="${user}" th:method="get">
+
+	<form th:action="@{/Search}" th:object="${user}" th:method="get">
+
+		<p>顧客：</p>
+		<select name="clientname" th:field="*{clientname}">
+			<option value="beer" selected="selected" class="msg">顧客</option>
+			<option value="beer" class="beer">ビールシステム</option>
+			<option value="meiji" class="meiji">明治製作所</option>
+			<option value="abc" class="abc">ABC</option>
+		</select>
+
+		<p>ステータス:</p>
+		<select name="status" th:field="*{status}">
+			<option value="beer" selected="selected" class="msg">ステータス</option>
+			<option value="seikyuu" class="beer">請求済み</option>
+			<option value="nounyuu" class="beer">納入済み</option>
+			<option value="seizou" class="beer">製造着手</option>
+			<option value="zyutyuu" class="beer">受注</option>
+			<option value="mitumori" class="beer">見積済み</option>
+			<option value="seikyuu" class="meiji">請求済み</option>
+			<option value="seizou" class="meiji">製造完了</option>
+			<option value="seikyuu" class="abc">請求済み</option>
+			<option value="seizou" class="abc">製造着手</option>
+		</select>
+	<script>
+	$(function() {
+		// 顧客が変更されたら発動
+		$('select[name="clientname"]').change(function() {
+
+			// 選択されている顧客のクラス名を取得
+			var clientName = $('select[name="clientname"] option:selected').attr("class");
+			console.log(clientName);
+
+			// ステータスの要素数を取得
+			var count = $('select[name="status"]').children().length;
+
+			// ステータスの要素数分、for文で回す
+			for (var i=0; i<count; i++) {
+
+				var status = $('select[name="status"] option:eq(' + i + ')');
+
+				if(status.attr("class") === clientName) {
+					// 選択した顧客と同じクラス名だった場合
+
+					status.show();
+				}else {
+					// 選択した顧客とクラス名が違った場合
+
+					if(status.attr("class") === "msg") {
+						// 「ステータスを選択して下さい」という要素だった場合
+
+							status.show();  //「ステータスを選択して下さい」を表示させる
+							status.prop('selected',true);  //「ステータスを選択して下さい」を強制的に選択されている状態にする
+					} else {
+						// 「ステータスを選択して下さい」という要素でなかった場合
+
+						status.hide();
+					}
+				}
+			}
+		})
+	})
+	</script>
+
 	<div  style="position: relative; left: 400px; top: -25px;">
 		件名：<td><input type="text" th:field="*{subject}"></td>
     	<input type="submit"name="search" value="検索"/>
-    	 <input type="hidden" name="mailadd" th:value="$loginmail}">
+    	<input type="hidden" name="mailadd" th:value="${loginmail}">
     </div>
 </form>
 

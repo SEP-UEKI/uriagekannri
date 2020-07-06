@@ -42,10 +42,10 @@ public class UserService {
 	* ユーザー情報 検索
 	* @return 検索結果
 	*/
-	public Page<User> SearchUserCriteria(String MailInf,String Searchinf,Pageable pageable) {
+	public Page<User> SearchUserCriteria(String Gstatus,String Gclientname,String MailInf,String Searchinf,Pageable pageable) {
 
 
-	    Page<User> wordPage = userRepository.findAllByFreeword(MailInf,Searchinf, pageable);
+	    Page<User> wordPage = userRepository.findAllByFreeword(Gstatus,Gclientname,MailInf,Searchinf, pageable);
 
 	    return wordPage;
 	}
