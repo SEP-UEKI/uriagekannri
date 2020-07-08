@@ -21,8 +21,6 @@ table {border-collapse: collapse;}
 		<td>さん</td>
 	</tr>
 </table>
-🍺🐔🏠🔥
-
 <form action="/add">
     <input type="submit" name="newAdd" value="新規登録" style="WIDTH: 250px; HEIGHT: 20px" />
     <input type="hidden" name="newAddress" value="新規登録">
@@ -34,9 +32,9 @@ table {border-collapse: collapse;}
 		<tr>
 			<th class="cell_title">顧客</th>
 			<th class="cell_required">：</th>
-				<td><select id="singleSelect" name="selectedItemC" th:field="*{clientname}">
-    			<option value="beer" selected="selected" class="msg">---</option>
-    			<option th:each="item : ${item}" th:value="${item.clientname}" th:text="${item.clientname}">
+				<td><select id="singleSelect" name="clientname" th:field="*{clientname}">
+    			<option value="none" selected="selected" class="msg">---</option>
+    			<option th:each="item : ${item}" th:value="${item.clientname}" th:text="${item.clientname}" th:class="${item.id}">
 				</select>
 				</td>
 		</tr>
@@ -44,9 +42,9 @@ table {border-collapse: collapse;}
 		<tr>
 			<th class="cell_title">ステータス</th>
 			<th class="cell_required">：</th>
-				<td><select id="singleSelect" name="selectedItemS" th:field="*{status}">
-    			<option value="beer" selected="selected" class="msg">---</option>
-    			<option th:each="item : ${item}" th:value="${item.status}" th:text="${item.status}">
+				<td><select id="singleSelect" name="status" th:field="*{status}">
+    			<option value="none" selected="selected" class="msg">---</option>
+    			<option th:each="items : ${items}" th:value="${items.status}" th:text="${items.status}" th:class="${items.id}">
 				</select>
 				</td>
 		</tr>
@@ -89,13 +87,14 @@ table {border-collapse: collapse;}
 		})
 	})
 	</script>
+	</table>
 
 	<div  style="position: relative; left: 400px; top: -25px;">
 		件名：<td><input type="text" th:field="*{subject}"></td>
     	<input type="submit"name="search" value="検索"/>
     	<input type="hidden" name="mailadd" th:value="${loginmail}">
     </div>
-    </table>
+
 </form>
 
 

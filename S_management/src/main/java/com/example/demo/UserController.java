@@ -69,8 +69,6 @@ public class UserController {
 		 	}
 		}
 
-
-
 		/**
 		 * 一覧表示画面表示
 		 * @param user リクエストデータ
@@ -78,7 +76,7 @@ public class UserController {
 		 * @return 一覧表示画面
 		 */
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public String getAllUsers(@Validated User user, @Validated User2 user2,BindingResult result,
+	public String getAllUsers(@Validated User user, @Validated User2 user2,@Validated User4 user4,BindingResult result,
 			@PageableDefault(size = 10) Pageable pageable,
 			Model model) {
 
@@ -87,7 +85,8 @@ public class UserController {
 		Logname = user2.getName();
 		Logmail = user2.getMailadd();
 
-		List<User> purudata = userService.findAll();
+		List<User3> purudata = userService.findall();
+		List<User4> purudata2 = userService.findAll();
 
 
 		Page<User> wordPage = userService.searchUser(Logmail,pageable);
@@ -97,6 +96,7 @@ public class UserController {
 		model.addAttribute("loginusers", Logname);
 		model.addAttribute("loginmail", Logmail);
 		model.addAttribute("item", purudata);
+		model.addAttribute("items", purudata2);
 		return "index";
 	}
 
