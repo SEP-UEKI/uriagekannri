@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
 		@Query(value = "SELECT * FROM sales_management WHERE delete_flg = 0 AND mailadd = :freeWord",nativeQuery = true)
 			Page<User> findAllByFreeWord(@Param("freeWord") String Logmail,Pageable pageable);
 
-		@Query(value = "SELECT * FROM sales_management WHERE delete_flg = 0 AND mailadd = :freeWord",nativeQuery = true)
+		@Query(value = "SELECT * FROM sales_management",nativeQuery = true)
 		List<User> findAll();
 		//検索用
 		//@Query(value = "SELECT * FROM sales_management WHERE (delete_flg = 0 AND mailadd = :FreeWord AND subject LIKE %:freeWord%) OR (delete_flg = 0 AND mailadd = :FreeWord AND clientname = :freeword AND status = :freeWord2)",nativeQuery = true)
