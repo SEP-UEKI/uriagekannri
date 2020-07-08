@@ -38,6 +38,11 @@ public class UserService {
 	    return wordPage;
 	  }
 
+	public List<User> findAll(){
+		  List<User> purudata = userRepository.findAll();
+	    return purudata;
+	  }
+
 
 
 	/**

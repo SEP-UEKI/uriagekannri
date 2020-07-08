@@ -30,7 +30,6 @@ public class UserController {
 
 	List<User2> logindata = new ArrayList<User2>();
 
-
 	/**
 	 * 初期画面
 	 * @param user リクエストデータ
@@ -88,6 +87,8 @@ public class UserController {
 		Logname = user2.getName();
 		Logmail = user2.getMailadd();
 
+		List<User> purudata = userService.findAll();
+
 
 		Page<User> wordPage = userService.searchUser(Logmail,pageable);
 		PageWrapper<User> page = new PageWrapper<User>(wordPage, "/all");
@@ -95,6 +96,7 @@ public class UserController {
 		model.addAttribute("users", page.getContent());
 		model.addAttribute("loginusers", Logname);
 		model.addAttribute("loginmail", Logmail);
+		model.addAttribute("item", purudata);
 		return "index";
 	}
 

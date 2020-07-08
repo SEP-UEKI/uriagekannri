@@ -29,29 +29,27 @@ table {border-collapse: collapse;}
 </form>
 
 
-	<form th:action="@{/Search}" th:object="${user}" th:method="get">
+<form th:action="@{/Search}" th:object="${user}" th:method="get">
+	<table>
+		<tr>
+			<th class="cell_title">顧客</th>
+			<th class="cell_required">：</th>
+				<td><select id="singleSelect" name="selectedItemC" th:field="*{clientname}">
+    			<option value="beer" selected="selected" class="msg">---</option>
+    			<option th:each="item : ${item}" th:value="${item.clientname}" th:text="${item.clientname}">
+				</select>
+				</td>
+		</tr>
 
-		<p>顧客：</p>
-		<select name="clientname" th:field="*{clientname}">
-			<option value="client" selected="selected" class="msg">顧客</option>
-			<option value="ビールシステム" class="beer">ビールシステム</option>
-			<option value="明治製作所" class="meiji">明治製作所</option>
-			<option value="ABC" class="abc">ABC</option>
-		</select>
-
-		<p>ステータス:</p>
-		<select name="status" th:field="*{status}">
-			<option value="beer" selected="selected" class="msg">ステータス</option>
-			<option value="請求済み" class="beer">請求済み</option>
-			<option value="納入済み" class="beer">納入済み</option>
-			<option value="製造着手" class="beer">製造着手</option>
-			<option value="受注" class="beer">受注</option>
-			<option value="見積済み" class="beer">見積済み</option>
-			<option value="請求済み" class="meiji">請求済み</option>
-			<option value="製造完了" class="meiji">製造完了</option>
-			<option value="請求済み" class="abc">請求済み</option>
-			<option value="製造完了" class="abc">製造完了</option>
-		</select>
+		<tr>
+			<th class="cell_title">ステータス</th>
+			<th class="cell_required">：</th>
+				<td><select id="singleSelect" name="selectedItemS" th:field="*{status}">
+    			<option value="beer" selected="selected" class="msg">---</option>
+    			<option th:each="item : ${item}" th:value="${item.status}" th:text="${item.status}">
+				</select>
+				</td>
+		</tr>
 	<script>
 	$(function() {
 		// 顧客が変更されたら発動
@@ -97,7 +95,9 @@ table {border-collapse: collapse;}
     	<input type="submit"name="search" value="検索"/>
     	<input type="hidden" name="mailadd" th:value="${loginmail}">
     </div>
+    </table>
 </form>
+
 
 <table border="1">
     <tr>
