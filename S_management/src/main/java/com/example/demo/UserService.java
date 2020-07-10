@@ -26,6 +26,8 @@ public class UserService {
 	private UserRepository3 userRepository3;
 	@Autowired
 	private UserRepository4 userRepository4;
+	@Autowired
+	private UserRepository5 userRepository5;
 
 	public List<User2> SearchUser2(String Loginname,String Logind,Pageable pageable) {
 		List<User2> logindata = userRepository2.findAllbyfreeword(Loginname,Logind,pageable);
@@ -50,6 +52,11 @@ public class UserService {
 	public List<User4> findAll(){
 		  List<User4> purudata2 = userRepository4.findAll();
 	    return purudata2;
+	  }
+
+	public List<User5> FindAll(){
+		  List<User5> purudata3 = userRepository5.findAll();
+	    return purudata3;
 	  }
 
 

@@ -165,10 +165,20 @@ public class UserController {
 	 * @return 新規登録画面表示
 	 */
 	@GetMapping(value = "/add")
-	public String displayAdd(Form form, Form2 form2,Model model) {
+	public String displayAdd(@Validated User user,Form form, Form2 form2,Model model) {
+
+		String MailInf;
+		MailInf = user.getMailadd();
+
+		List<User3> purudata = userService.findall();
+		List<User5> purudata3 = userService.FindAll();
+
 		model.addAttribute("user", new User());
 		model.addAttribute("selectItems", getSelectedItems());
 		model.addAttribute("selectItems2", getSelectedItems2());
+		model.addAttribute("MailInf", MailInf);
+		model.addAttribute("item", purudata);
+		model.addAttribute("itemS", purudata3);
 		return "add";
 	}
 

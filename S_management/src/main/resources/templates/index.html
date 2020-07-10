@@ -21,9 +21,10 @@ table {border-collapse: collapse;}
 		<td>さん</td>
 	</tr>
 </table>
-<form action="/add">
+<form action="/add" th:object="${user}" th:method="get">
     <input type="submit" name="newAdd" value="新規登録" style="WIDTH: 250px; HEIGHT: 20px" />
     <input type="hidden" name="newAddress" value="新規登録">
+    <input type="hidden" name="mailadd" th:value="${loginmail}">
 </form>
 
 

@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
@@ -8,27 +10,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Data;
+
+@Data
 @Embeddable
-@Table(name="sales_status")
 
-public class User4PK {
+public class User4PK implements Serializable {
 
-	private long id;
-	private long branchnum;
+	@Id
+    @Column(name = "id")
+    private long id;
 
-	public long getId() {
-        return id;
-    }
-    public void setId(long id) {
-        this.id = id;
-    }
+	@Id
+    @Column(name = "branchnum")
+    private long branchnum;
 
-    public long getBranchnum() {
-        return branchnum;
-    }
-    public void setBranchnum(long branchnum) {
-        this.branchnum = branchnum;
-    }
+	@Column(name = "status")
+    private String status;
+
 
 
 }

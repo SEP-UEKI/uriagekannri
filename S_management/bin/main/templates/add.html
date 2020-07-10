@@ -11,17 +11,14 @@
 	<form th:action="@{/userC}" th:object="${user}" th:method="get">
 		<table>
 			<tr>
-				<th class="cell_title">顧客</th>
-				<th class="cell_required">：</th>
-				<td>
-					<div>
-						<select id="singleSelect" name="selectedItem" th:field="*{clientname}">
-     					<option value="">---</option>
-    					<option th:each="item : ${selectItems}" th:value="${item.value}" th:text="${item.value}"> <!--th:selected="${item.value} == *{selectedItem}">singleSelect</option> -->
-						</select>
-					</div>
+			<th class="cell_title">顧客</th>
+			<th class="cell_required">：</th>
+				<td><select id="singleSelect" name="clientname" th:field="*{clientname}">
+    			<option value="none" selected="selected" class="msg">---</option>
+    			<option th:each="item : ${item}" th:value="${item.clientname}" th:text="${item.clientname}" th:class="${item.id}">
+				</select>
 				</td>
-			</tr>
+		</tr>
 			<tr>
 				<th class="cell_title">受注日</th>
 				<th class="cell_required">：</th>
@@ -70,11 +67,10 @@
 			<tr>
 				<th class="cell_title">ステータス</th>
 				<th class="cell_required">：</th>
-				<td>
-					<select id="singleSelect" name="selectedItem2" th:field="*{status}">
-    			 	<option value="">---</option>
-    			 	<option th:each="item : ${selectItems2}" th:value="${item.value}" th:text="${item.value}"> <!--th:selected="${item.value} == *{selectedItem2}">singleSelect</option> -->
-					</select>
+				<td><select id="singleSelect" name="status" th:field="*{status}">
+    			<option value="none" selected="selected" class="msg">---</option>
+    			<option th:each="itemS : ${itemS}" th:value="${itemS.status}" th:text="${itemS.status}">
+				</select>
 				</td>
 			</tr>
 			<tr>

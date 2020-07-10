@@ -1,41 +1,28 @@
 package com.example.demo;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
+import lombok.Data;
 
+@Data
 @Entity
+@IdClass(User4PK.class)
 @Table(name="sales_status")
 public class User4 {
 
-	@EmbeddedId
-	private User4PK user4PK;
+	@Id
+    @Column(name = "id")
+    private long id;
 
-	private String status;
+	@Id
+    @Column(name = "branchnum")
+    private long branchnum;
 
-	/**public long getId() {
-        return id;
-    }
-    public void setId(long id) {
-        this.id = id;
-    }*/
-    public String getStatus() {
-        return status;
-    }
-    public void setStatus(String status) {
-        this.status = status;
-    }
-   /** public long getBranchnum() {
-        return branchnum;
-    }
-    public void setBranchnum(long branchnum) {
-        this.branchnum = branchnum;
-    }*/
+	@Column(name = "status")
+    private String status;
 
 }
