@@ -21,10 +21,16 @@ table {border-collapse: collapse;}
 		<td>さん</td>
 	</tr>
 </table>
+
+
 <form action="/add" th:object="${user}" th:method="get">
     <input type="submit" name="newAdd" value="新規登録" style="WIDTH: 250px; HEIGHT: 20px" />
     <input type="hidden" name="newAddress" value="新規登録">
     <input type="hidden" name="mailadd" th:value="${loginmail}">
+</form>
+
+<form action="/" th:method="get">
+ <input type="submit" name="newAdd" value="ログアウト" style="WIDTH: 250px; HEIGHT: 20px" />
 </form>
 
 
@@ -38,9 +44,9 @@ table {border-collapse: collapse;}
     			<option th:each="item : ${item}" th:value="${item.clientname}" th:text="${item.clientname}" th:class="${item.id}">
 				</select>
 				</td>
-		</tr>
 
-		<tr>
+
+
 			<th class="cell_title">ステータス</th>
 			<th class="cell_required">：</th>
 				<td><select id="singleSelect" name="status" th:field="*{status}">

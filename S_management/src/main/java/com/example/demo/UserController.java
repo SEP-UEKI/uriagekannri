@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 
@@ -101,21 +102,56 @@ public class UserController {
 	}
 
 
+
+	/**
+	 * 遷移後の一覧表示画面表示
+	 * @param user リクエストデータ
+	 * @param model Model
+	 * @return 一覧表示画面
+	 */
+	@RequestMapping(value = "/all2", method = RequestMethod.GET)
+	public String AllUsers(@RequestParam("user2") String Mailadd,@Validated User user, @Validated User2 user2,@Validated User4 user4,BindingResult result,
+			@PageableDefault(size = 10) Pageable pageable,
+			Model model) {
+
+		String Logname;
+		String Logmail;
+		Logname = user2.getName();
+		Logmail = user2.getMailadd();
+
+		List<User3> purudata = userService.findall();
+		List<User4> purudata2 = userService.findAll();
+
+
+		Page<User> wordPage = userService.searchUser(Logmail,pageable);
+		PageWrapper<User> page = new PageWrapper<User>(wordPage, "/all");
+		model.addAttribute("page", page);
+		model.addAttribute("users", page.getContent());
+		model.addAttribute("loginusers", Logname);
+		model.addAttribute("loginmail", Logmail);
+		model.addAttribute("item", purudata);
+		model.addAttribute("items", purudata2);
+		return "index";
+	}
+
+
 	/**
 	* ユーザー情報 検索
 	* @return 検索結果
 	*/
 	@RequestMapping(value = "/Search", method = RequestMethod.GET)
-	public String getSearchUsers(User user,@Validated UserCriteria usercriteria,BindingResult result,
+	public String getSearchUsers(User user,@Validated User2 user2,@Validated UserCriteria usercriteria,BindingResult result,
 								  @PageableDefault(size = 10) Pageable pageable,
 								  Model model) {
 		String Searchinf;
 		String MailInf;
 		String Gclientname;
 		String Gstatus;
+		String Logname;
 		int delete_flg;
 
 
+		Logname = user2.getName();
 		Searchinf = user.getSubject();
 		MailInf = user.getMailadd();
 		Gclientname = user.getClientname();
@@ -127,6 +163,7 @@ public class UserController {
 		PageWrapper<User> page = new PageWrapper<User>(wordPage, "/all");
 		model.addAttribute("page", page);
 		model.addAttribute("users", page.getContent());
+		model.addAttribute("loginusers", Logname);
 		return"index";
 	}
 
@@ -167,8 +204,8 @@ public class UserController {
 	@GetMapping(value = "/add")
 	public String displayAdd(@Validated User user,Form form, Form2 form2,Model model) {
 
-		String MailInf;
-		MailInf = user.getMailadd();
+		String Mailadd;
+		Mailadd = user.getMailadd();
 
 		List<User3> purudata = userService.findall();
 		List<User5> purudata3 = userService.FindAll();
@@ -176,7 +213,7 @@ public class UserController {
 		model.addAttribute("user", new User());
 		model.addAttribute("selectItems", getSelectedItems());
 		model.addAttribute("selectItems2", getSelectedItems2());
-		model.addAttribute("MailInf", MailInf);
+		model.addAttribute("Mailadd", Mailadd);
 		model.addAttribute("item", purudata);
 		model.addAttribute("itemS", purudata3);
 		return "add";
@@ -185,6 +222,8 @@ public class UserController {
 
 	@GetMapping("/userC")
 	public String usercreate(User user, Model model) {
+
+
 
 		user.setId(user.getId());
     	user.setClientname(user.getClientname());
@@ -198,6 +237,7 @@ public class UserController {
     	user.setMoney(user.getMoney());
     	user.setMoney2(user.getMoney2());
     	user.setStatus(user.getStatus());
+    	user.setMailadd(user.getMailadd());
 		model.addAttribute("user", user);
 		return "CreateUser";
 	}
@@ -209,11 +249,14 @@ public class UserController {
 	 * @return ユーザー情報一覧画面
 	 */
 	@RequestMapping(value = "/usercreate", method = RequestMethod.POST)
-		public String create(@Validated @ModelAttribute User user, BindingResult result, Model model) {
+		public String create(@Validated User2 user2,@Validated @ModelAttribute User user,
+				RedirectAttributes redirectAttribute,BindingResult result, Model model) {
 
 		 // ユーザー情報の登録
 	    userService.create(user);
-	    return "redirect:/all";
+	    user.setMailadd(user.getMailadd());
+	    redirectAttribute.addAttribute("user2", user);
+	    return "redirect:/all2";
 		}
 
 
@@ -227,6 +270,8 @@ public class UserController {
 		public String displayEdit(@PathVariable Long id, Form2 form2,Model model) {
 	    	User user = userService.findById(id);
 
+			List<User5> purudata3 = userService.FindAll();
+
 	    	user.setId(user.getId());
 	    	user.setClientname(user.getClientname());
 	    	user.setDay(user.getDay());
@@ -239,9 +284,9 @@ public class UserController {
 	    	user.setMoney(user.getMoney());
 	    	user.setMoney2(user.getMoney2());
 	    	user.setStatus(user.getStatus());
-	    	//user.setMailadd(user.getMailadd());
+	    	user.setMailadd(user.getMailadd());
 	    	model.addAttribute("user", user);
-	    	model.addAttribute("selectItems2", getSelectedItems2());
+			model.addAttribute("itemS", purudata3);
 	    	return "UpdateU";
 	    }
 

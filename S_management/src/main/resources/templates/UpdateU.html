@@ -61,17 +61,17 @@
             <tr>
 				<th class="cell_title">ステータス</th>
 				<th class="cell_required">：</th>
-				<td>
-					<select id="singleSelect" name="selectedItem2" th:field="*{status}">
-    			 	<option value="">---</option>
-    			 	<option th:each="item : ${selectItems2}" th:value="${item.value}" th:text="${item.value}"> <!--th:selected="${item.value} == *{selectedItem2}">singleSelect</option> -->
-					</select>
+				<td><select id="singleSelect" name="status" th:field="*{status}">
+    			<option value="none" selected="selected" class="msg">---</option>
+    			<option th:each="itemS : ${itemS}" th:value="${itemS.status}" th:text="${itemS.status}">
+				</select>
 				</td>
 			</tr>
         </table>
         <input type="submit"  value="確認" class="btn">
         <input type="button" onClick='history.back();' value="戻る">
         <input type="hidden" name="id" th:value="${user.id}">
+         <input type="hidden" name="Mailadd" th:value="${user.Mailadd}">
        <!-- <input type="hidden"  th:field="*{clientname}" th:value="${clientname}">
         <input type="hidden"  th:field="*{day}" th:value="${day}">
         <input type="hidden"  th:field="*{snumber}" th:value="${snumber}">

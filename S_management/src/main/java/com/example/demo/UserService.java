@@ -75,9 +75,6 @@ public class UserService {
 				.and(CustomerSpecs.deleteflgEquals(0));
     	Page<User> wordPage = userRepository.findAll(spec,pageable);
 
-
-	    //Page<User> wordPage = userRepository.findAllByFreeword(Gstatus,Gclientname,MailInf,Searchinf, pageable);
-
 	    return wordPage;
 	}
 

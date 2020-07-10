@@ -18,7 +18,7 @@
     			<option th:each="item : ${item}" th:value="${item.clientname}" th:text="${item.clientname}" th:class="${item.id}">
 				</select>
 				</td>
-		</tr>
+			</tr>
 			<tr>
 				<th class="cell_title">受注日</th>
 				<th class="cell_required">：</th>
@@ -78,10 +78,11 @@
 				<th class="cell_required">：</th>
 				<td><textarea name="bikou" rows="4" cols="40"></textarea><br></td>
 			</tr>
-			</table>
-		<input type="submit" value="確認">
-		<input type="button"onClick='history.back();' value="戻る">
-		</form>
+		</table>
+			<input type="submit" value="確認">
+			<input type="button"onClick='history.back();' value="戻る">
+			<input type="hidden" name="mailadd" th:value="${Mailadd}">
+	</form>
 
 </body>
 </html>
