@@ -33,7 +33,7 @@ public class User2 {
     public String getMailadd() {
         return mailadd;
     }
-    public void setmailadd(String mailadd) {
+    public void setMailadd(String mailadd) {
         this.mailadd = mailadd;
     }
 }

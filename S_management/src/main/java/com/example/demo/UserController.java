@@ -110,13 +110,13 @@ public class UserController {
 	 * @return 一覧表示画面
 	 */
 	@RequestMapping(value = "/all2", method = RequestMethod.GET)
-	public String AllUsers(@RequestParam("user2") String Mailadd,@Validated User user, @Validated User2 user2,@Validated User4 user4,BindingResult result,
+	public String AllUsers(@ModelAttribute("user2") User2 user2,@Validated User user,@Validated User4 user4,BindingResult result,
 			@PageableDefault(size = 10) Pageable pageable,
 			Model model) {
 
 		String Logname;
 		String Logmail;
-		Logname = user2.getName();
+		//Logname = user2.getName();
 		Logmail = user2.getMailadd();
 
 		List<User3> purudata = userService.findall();
@@ -127,7 +127,7 @@ public class UserController {
 		PageWrapper<User> page = new PageWrapper<User>(wordPage, "/all");
 		model.addAttribute("page", page);
 		model.addAttribute("users", page.getContent());
-		model.addAttribute("loginusers", Logname);
+		//model.addAttribute("loginusers", Logname);
 		model.addAttribute("loginmail", Logmail);
 		model.addAttribute("item", purudata);
 		model.addAttribute("items", purudata2);
@@ -164,6 +164,7 @@ public class UserController {
 		model.addAttribute("page", page);
 		model.addAttribute("users", page.getContent());
 		model.addAttribute("loginusers", Logname);
+		model.addAttribute("loginmail", MailInf);
 		return"index";
 	}
 
@@ -254,8 +255,8 @@ public class UserController {
 
 		 // ユーザー情報の登録
 	    userService.create(user);
-	    user.setMailadd(user.getMailadd());
-	    redirectAttribute.addAttribute("user2", user);
+	    user2.setMailadd(user2.getMailadd());
+	    redirectAttribute.addFlashAttribute("user2", user2);
 	    return "redirect:/all2";
 		}
 
