@@ -116,7 +116,7 @@ public class UserController {
 
 		String Logname;
 		String Logmail;
-		//Logname = user2.getName();
+		Logname = user2.getName();
 		Logmail = user2.getMailadd();
 
 		List<User3> purudata = userService.findall();
@@ -127,7 +127,7 @@ public class UserController {
 		PageWrapper<User> page = new PageWrapper<User>(wordPage, "/all");
 		model.addAttribute("page", page);
 		model.addAttribute("users", page.getContent());
-		//model.addAttribute("loginusers", Logname);
+		model.addAttribute("loginusers", Logname);
 		model.addAttribute("loginmail", Logmail);
 		model.addAttribute("item", purudata);
 		model.addAttribute("items", purudata2);
@@ -203,10 +203,14 @@ public class UserController {
 	 * @return 新規登録画面表示
 	 */
 	@GetMapping(value = "/add")
-	public String displayAdd(@Validated User user,Form form, Form2 form2,Model model) {
+	public String displayAdd(@Validated User2 user2,@Validated User user,Form form, Form2 form2,Model model) {
 
 		String Mailadd;
 		Mailadd = user.getMailadd();
+
+		String Name;
+		Name = user2.getName();
+
 
 		List<User3> purudata = userService.findall();
 		List<User5> purudata3 = userService.FindAll();
@@ -215,6 +219,7 @@ public class UserController {
 		model.addAttribute("selectItems", getSelectedItems());
 		model.addAttribute("selectItems2", getSelectedItems2());
 		model.addAttribute("Mailadd", Mailadd);
+		model.addAttribute("Name", Name);
 		model.addAttribute("item", purudata);
 		model.addAttribute("itemS", purudata3);
 		return "add";
@@ -222,7 +227,7 @@ public class UserController {
 
 
 	@GetMapping("/userC")
-	public String usercreate(User user, Model model) {
+	public String usercreate(@Validated User2 user2,User user, Model model) {
 
 
 
@@ -239,7 +244,9 @@ public class UserController {
     	user.setMoney2(user.getMoney2());
     	user.setStatus(user.getStatus());
     	user.setMailadd(user.getMailadd());
+    	user2.setName(user2.getName());
 		model.addAttribute("user", user);
+		model.addAttribute("user", user2);
 		return "CreateUser";
 	}
 
@@ -256,6 +263,7 @@ public class UserController {
 		 // ユーザー情報の登録
 	    userService.create(user);
 	    user2.setMailadd(user2.getMailadd());
+	    user2.setName(user2.getName());
 	    redirectAttribute.addFlashAttribute("user2", user2);
 	    return "redirect:/all2";
 		}
@@ -270,6 +278,8 @@ public class UserController {
 	@GetMapping("/user/{id}/edit")
 		public String displayEdit(@PathVariable Long id, Form2 form2,Model model) {
 	    	User user = userService.findById(id);
+
+
 
 			List<User5> purudata3 = userService.FindAll();
 
@@ -296,7 +306,7 @@ public class UserController {
 	public String userEdit(@Validated @ModelAttribute User user,Model model,@RequestParam String clientname,
 			@RequestParam String day,@RequestParam String snumber,@RequestParam String subject,@RequestParam String quantity,
 			@RequestParam String deliveryday,@RequestParam String deliveryday2,@RequestParam String billingday,@RequestParam String money,
-			@RequestParam String money2,@RequestParam String status) {
+			@RequestParam String money2,@RequestParam String status,@RequestParam String Mailadd) {
 
 		user.setId(user.getId());
 		user.setClientname(clientname);
@@ -310,6 +320,7 @@ public class UserController {
 		user.setMoney(money);
 		user.setMoney2(money2);
 		user.setStatus(status);
+		user.setMailadd(user.getMailadd());
 		model.addAttribute("user", user);
 
 		return "userEdit";
@@ -323,10 +334,14 @@ public class UserController {
 	 * @return ユーザー情報詳細画面
 	 */
 	@RequestMapping(value="/userupdate", method=RequestMethod.POST)
-		public String update(@Validated @ModelAttribute User user, BindingResult result, Model model) {
+		public String update(@Validated User2 user2,@Validated @ModelAttribute User user,
+							RedirectAttributes redirectAttribute,BindingResult result, Model model) {
+
 	    // ユーザー情報の更新
 	    userService.update(user);
-	    return "redirect:/all";
+	    user2.setMailadd(user2.getMailadd());
+	    redirectAttribute.addFlashAttribute("user2", user2);
+	    return "redirect:/all2";
 		}
 
 
@@ -351,9 +366,13 @@ public class UserController {
 		}
 
 	@RequestMapping(value="/userdelete", method=RequestMethod.POST)
-	public String delete(@Validated @ModelAttribute User user, BindingResult result, Model model) {
+	public String delete(@Validated User2 user2,@Validated @ModelAttribute User user,
+			RedirectAttributes redirectAttribute,BindingResult result, Model model) {
 	// ユーザー情報の更新
 	userService.delete(user);
-	return "redirect:/all";
+	user2.setMailadd(user2.getMailadd());
+    user2.setName(user2.getName());
+    redirectAttribute.addFlashAttribute("user2", user2);
+    return "redirect:/all2";
 	}
 }
