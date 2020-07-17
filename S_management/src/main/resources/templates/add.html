@@ -8,7 +8,12 @@
 </head>
 <body>
 	<h3>製造部売上管理システム：案件登録</h3>
-	<form th:action="@{/userC}" th:object="${user}" th:method="get">
+	<table>
+    	<tr th:if="${validationError}" th:each="error : ${validationError}">
+      		<td style="color:red;" th:text="${error}"></td>
+    	</tr>
+  	</table>
+	<form th:action="@{/userC}" th:object="${userRequest}" th:method="get">
 		<table>
 			<tr>
 			<th class="cell_title">顧客</th>
@@ -37,7 +42,7 @@
 			<tr>
 				<th class="cell_title">数量</th>
 				<th class="cell_required">：</th>
-				<td><input type="text" th:field="*{quantity}">式</td>
+				<td><input type="text" th:field="*{quantity}"></td>
 			</tr>
 			<tr>
 				<th class="cell_title">納入指定日</th>
