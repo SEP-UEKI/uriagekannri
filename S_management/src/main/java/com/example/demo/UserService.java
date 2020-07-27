@@ -28,6 +28,8 @@ public class UserService {
 	private UserRepository4 userRepository4;
 	@Autowired
 	private UserRepository5 userRepository5;
+	@Autowired
+	private UserRepository6 userRepository6;
 
 	public List<User2> SearchUser2(String Loginname,String Logind,Pageable pageable) {
 		List<User2> logindata = userRepository2.findAllbyfreeword(Loginname,Logind,pageable);
@@ -59,6 +61,14 @@ public class UserService {
 	    return purudata3;
 	  }
 
+	/**
+	* CSV出力用検索結果
+	* @return 検索結果
+	*/
+	public List<Member> FindALL(){
+		 List<Member> members = userRepository6.findAll();
+		 return members;
+	}
 
 
 	/**
