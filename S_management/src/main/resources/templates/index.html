@@ -13,7 +13,7 @@ table {border-collapse: collapse;}
 </style>
 </head>
 <body>
-<h3>製造部売り上げ管理システム:案件一覧</h3>
+<h3>●製造部売り上げ管理システム:案件一覧●</h3>
 <span id="view_clock"></span>
 
 <script type="text/javascript">
@@ -205,6 +205,11 @@ function getNow() {
 <form id="csvform" method="post" th:action="@{/download/csv}">
     <input type="hidden" name="filename"/>
     <button type="submit">CSVファイル出力</button>
+</form>
+</form>
+<form id="csvform" method="post" th:action="@{/download/excel}">
+    <input type="hidden" name="filename2"/>
+    <button type="submit">excelファイル出力</button>
 </form>
 </body>
 </html>
