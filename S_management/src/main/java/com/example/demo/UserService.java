@@ -113,6 +113,20 @@ public class UserService {
 	    userRepository.save(Cuser);
 	  }
 
+
+
+	  /**
+	   * 顧客情報 新規登録
+	   * @param user ユーザー情報
+	   */
+	public void createC(UserRequest2 userRequest2) {
+		User3 Cuser = new User3();
+
+		Cuser.setClientname(userRequest2.getClientname());
+		userRepository3.save(Cuser);
+	  }
+
+
 	 /**
      * ユーザー情報 主キー検索
      * @return 検索結果

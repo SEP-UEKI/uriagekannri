@@ -274,6 +274,92 @@ public class UserController {
 		return "redirect:/all2";
 	}
 
+
+	/**
+	 * 顧客登録画面表示
+	 * @param user リクエストデータ
+	 * @param model Model
+	 * @return 顧客登録確認画面表示
+	 */
+	@GetMapping(value = "/clientcreate")
+	public String displaycreate(@Validated User2 user2, @Validated User user, Model model) {
+
+		String Mailadd;
+		Mailadd = user.getMailadd();
+
+		String Name;
+		Name = user2.getName();
+
+		model.addAttribute("userRequest2", new UserRequest2());
+		model.addAttribute("Mailadd", Mailadd);
+		model.addAttribute("Name", Name);
+
+		return "clientcreate";
+	}
+
+
+
+	/**
+	 * 顧客登録確認画面表示
+	 * @param user リクエストデータ
+	 * @param model Model
+	 * @return 顧客登録
+	 */
+
+	@GetMapping("/clientC")
+	public String clientcreate(@Validated @ModelAttribute UserRequest2 userRequest2, BindingResult result,
+								User2 user2,User user,User3 user3, Model model) {
+
+
+		//String Mailadd;
+		//Mailadd = user.getMailadd();
+
+		//String Name;
+		//Name = user2.getName();
+
+
+		//バリデーションチェック
+		if (result.hasErrors()) {
+			List<String> errorList = new ArrayList<String>();
+			for (ObjectError error : result.getAllErrors()) {
+				errorList.add(error.getDefaultMessage());
+			}
+			model.addAttribute("validationError", errorList);
+			return "clientcreate";
+		} else {
+		}
+
+		userRequest2.setClientname(user3.getClientname());
+		user.setMailadd(user.getMailadd());
+		user.setName( user2.getName());
+
+		//model.addAttribute("Mailadd", Mailadd);
+		//model.addAttribute("Name", Name);
+		model.addAttribute("userRequest2", userRequest2);
+		model.addAttribute("user", user);
+		return "createClient";
+
+	}
+
+
+	/**
+	 * 顧客登録
+	 * @param user リクエストデータ
+	 * @param model Model
+	 * @return 案件一覧表示
+	 */
+	@RequestMapping(value = "/createClient", method = RequestMethod.POST)
+	public String createclient(@Validated User2 user2, @Validated @ModelAttribute User user,
+			RedirectAttributes redirectAttribute, UserRequest2 userRequest2, BindingResult result, Model model) {
+
+		// ユーザー情報の登録
+		userService.createC(userRequest2);
+		user2.setMailadd(user2.getMailadd());
+		user2.setName(user2.getName());
+		redirectAttribute.addFlashAttribute("user2", user2);
+		return "redirect:/all2";
+	}
+
 	/**
 	 * ユーザー編集画面を表示
 	 * @param id 表示するユーザーID

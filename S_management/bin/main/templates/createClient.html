@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>顧客登録</title>
+    <meta charset="utf-8" />
+  </head>
+<body>
+<h1>製造部売上管理システム：顧客登録確認</h1>
+	<form th:action="@{/createClient}" th:object="${userRequest2}" th:method="post">
+		<table>
+			<tr>
+				<th class="cell_title">顧客名</th>
+				<th class="cell_required">:</th>
+				 <td><span th:text="*{clientname}" th:field="*{clientname}"></span></td>
+			</tr>
+		</table>
+	<input type="submit"  value="登録" class="btn">
+	<input type="button" onClick='history.back();' value="戻る">
+	<input type="hidden"  th:field="*{clientname}">
+	<input type="hidden"  th:field="${user.mailadd}">
+</form>
+</body>
+</html>

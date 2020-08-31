@@ -10,6 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="userinf")
 
+
 public class User2 {
 
 	@Id

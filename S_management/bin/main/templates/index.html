@@ -53,8 +53,11 @@ function getNow() {
     <input type="hidden" name="name" th:value="${loginusers}">
 </form>
 
-<form action="/" th:method="get">
- <input type="submit" name="newAdd" value="ログアウト" style="WIDTH: 250px; HEIGHT: 20px" />
+<form action="/clientcreate" th:object="${userRequest2}" th:method="get">
+    <input type="submit" name="newclient" value="顧客登録" style="WIDTH: 250px; HEIGHT: 20px" />
+    <input type="hidden" name="newclientname" value="顧客登録">
+    <input type="hidden" name="mailadd" th:value="${loginmail}">
+    <input type="hidden" name="name" th:value="${loginusers}">
 </form>
 
 
@@ -210,6 +213,9 @@ function getNow() {
 <form id="csvform" method="post" th:action="@{/download/excel}">
     <input type="hidden" name="filename2"/>
     <button type="submit">excelファイル出力</button>
+</form>
+<form action="/" th:method="get">
+ <input type="submit" name="newAdd" value="ログアウト" style="WIDTH: 250px; HEIGHT: 20px" />
 </form>
 </body>
 </html>

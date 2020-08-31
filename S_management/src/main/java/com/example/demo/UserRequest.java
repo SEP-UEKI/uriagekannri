@@ -18,7 +18,7 @@ public class UserRequest implements Serializable {
 	private String day;
 
 	@NotBlank(message = "顧客名を入力してください")
-	@Size(max = 10, message = "顧客名は10桁以内で入力してください")
+	@Size(max = 15, message = "顧客名は15桁以内で入力してください")
 	private String clientname;
 
 	@NotBlank(message = "シリアルナンバーを入力してください")

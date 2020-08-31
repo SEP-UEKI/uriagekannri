@@ -113,5 +113,9 @@ public class User {
     public void setMailadd(String mailadd) {
         this.mailadd = mailadd;
     }
+	public void setName(String name) {
+		// TODO 自動生成されたメソッド・スタブ
+
+	}
 
 }
