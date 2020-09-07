@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>顧客編集</title>
+    <meta charset="utf-8" />
+  </head>
+<body>
+<h3>製造部売上管理システム：顧客名編集</h3>
+<form th:action="@{/editclient}" th:object="${user}" th:method="post">
+	<table>
+         <tr>
+                <th class="cell_title">顧客名</th>
+                <th class="cell_required">:</th>
+                 <td><input type="text" th:field="*{clientname}"></td>
+            </tr>
+ 	</table>
+ 	<input type="submit"  value="編集確認" class="btn">
+	<input type="button" onClick='history.back();' value="戻る">
+	<input type="hidden"  th:field="*{id}" th:value="${user.id}">
+	<input type="hidden"  th:field="*{mailadd}" th:value="${user.mailadd}">
+	</form>
+</body>
+</html>

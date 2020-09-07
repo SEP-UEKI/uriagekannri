@@ -462,4 +462,64 @@ public class UserController {
 		redirectAttribute.addFlashAttribute("user2", user2);
 		return "redirect:/all2";
 	}
+
+
+	/**
+	 * 顧客一覧表示画面表示
+	 * @param user リクエストデータ
+	 * @param model Model
+	 * @return 顧客一覧表示画面
+	 */
+	@RequestMapping(value = "/clientall", method = RequestMethod.GET)
+	public String getAllclient(@Validated User user, @Validated User2 user2, @Validated User4 user4,
+			BindingResult result,
+			@PageableDefault(size = 10) Pageable pageable,@ModelAttribute User3 user3, Model model) {
+
+		String Mailadd;
+		Mailadd = user.getMailadd();
+
+		Page<User3> wordPage = userService.searchclient(pageable);
+		PageWrapper<User3> page = new PageWrapper<User3>(wordPage, "/clientall");
+		model.addAttribute("page", page);
+		model.addAttribute("users", page.getContent());
+		model.addAttribute("user", Mailadd);
+		model.addAttribute("userRequest2", new UserRequest2());
+		return "clientindex";
+	}
+
+
+	/**
+	 * ユーザー編集画面を表示
+	 * @param id 表示するユーザーID
+	 * @param model Model
+	 * @return ユーザー編集画面
+	 */
+	@GetMapping("/user/{id}/editC")
+	public String displayCEdit(@PathVariable Long id,  @ModelAttribute UserRequest2 userRequest2, BindingResult result,
+			User2 user2,User3 user3, Model model) {
+		User user = userService.findById(id);
+
+
+		//String Mailadd;
+		//Mailadd = user.getMailadd();
+
+		//バリデーションチェック
+				//if (result.hasErrors()) {
+					//List<String> errorList = new ArrayList<String>();
+					//for (ObjectError error : result.getAllErrors()) {
+						//errorList.add(error.getDefaultMessage());
+					//}
+					//model.addAttribute("validationError", errorList);
+					//return "clientcreate";
+				//} else {
+				//}
+
+		user.setId(user.getId());
+		user.setClientname(user.getClientname());
+		user.setMailadd(user.getMailadd());
+		model.addAttribute("user", user);
+		//model.addAttribute("userRequest2", userRequest2);
+
+		return "clientedit";
+	}
 }

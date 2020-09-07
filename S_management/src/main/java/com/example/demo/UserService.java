@@ -46,6 +46,11 @@ public class UserService {
 	    return wordPage;
 	  }
 
+	public Page<User3> searchclient(Pageable pageable) {
+		  Page<User3> wordPage = userRepository3.findAll(pageable);
+	    return wordPage;
+	  }
+
 	public List<User3> findall(){
 		  List<User3> purudata = userRepository3.findAll();
 	    return purudata;
