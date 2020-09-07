@@ -142,6 +142,16 @@ public class UserService {
 
 
     /**
+     * ユーザー情報 主キー検索
+     * @return 検索結果
+     */
+    public User3 findByid(long id) {
+        return userRepository3.findById(id).get();
+    }
+
+
+
+    /**
      * ユーザー情報 更新
      * @param user ユーザー情報
      */
@@ -179,5 +189,17 @@ public class UserService {
         userRepository.save(Duser);
     }
 
+
+    /**
+     * 顧客名 更新
+     * @param user ユーザー情報
+     */
+    public void clientupdate(User3 user3) {
+        User3 user = findByid(user3.getId());
+
+        user.setClientname(user.getClientname());
+        user.setDelete_flg(0);
+        userRepository3.save(user);
+    }
 
 }

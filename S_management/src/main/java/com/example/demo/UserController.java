@@ -357,7 +357,7 @@ public class UserController {
 		user2.setMailadd(user2.getMailadd());
 		user2.setName(user2.getName());
 		redirectAttribute.addFlashAttribute("user2", user2);
-		return "redirect:/all2";
+		return "redirect://clientall";
 	}
 
 	/**
@@ -471,55 +471,84 @@ public class UserController {
 	 * @return 顧客一覧表示画面
 	 */
 	@RequestMapping(value = "/clientall", method = RequestMethod.GET)
-	public String getAllclient(@Validated User user, @Validated User2 user2, @Validated User4 user4,
+	public String getAllclient(@Validated User user, @ModelAttribute("user2") User2 user2, @Validated User4 user4,
 			BindingResult result,
 			@PageableDefault(size = 10) Pageable pageable,@ModelAttribute User3 user3, Model model) {
 
 		String Mailadd;
-		Mailadd = user.getMailadd();
+		Mailadd = user2.getMailadd();
+
+		user.setMailadd(user2.getMailadd());
 
 		Page<User3> wordPage = userService.searchclient(pageable);
 		PageWrapper<User3> page = new PageWrapper<User3>(wordPage, "/clientall");
 		model.addAttribute("page", page);
 		model.addAttribute("users", page.getContent());
-		model.addAttribute("user", Mailadd);
+		model.addAttribute("user", user);
 		model.addAttribute("userRequest2", new UserRequest2());
 		return "clientindex";
 	}
 
 
 	/**
-	 * ユーザー編集画面を表示
+	 * 顧客編集画面を表示
 	 * @param id 表示するユーザーID
 	 * @param model Model
 	 * @return ユーザー編集画面
 	 */
-	@GetMapping("/user/{id}/editC")
-	public String displayCEdit(@PathVariable Long id,  @ModelAttribute UserRequest2 userRequest2, BindingResult result,
-			User2 user2,User3 user3, Model model) {
-		User user = userService.findById(id);
+	@GetMapping("/user3/{id}/editC")
+	public String displayCEdit(@PathVariable Long id, @RequestParam String mailadd, @ModelAttribute UserRequest2 userRequest2, BindingResult result,
+			User2 user2,User user,Model model) {
+		User3 user3 = userService.findByid(id);
+
+		String Mailadd;
+		Mailadd = mailadd;
 
 
-		//String Mailadd;
-		//Mailadd = user.getMailadd();
-
-		//バリデーションチェック
-				//if (result.hasErrors()) {
-					//List<String> errorList = new ArrayList<String>();
-					//for (ObjectError error : result.getAllErrors()) {
-						//errorList.add(error.getDefaultMessage());
-					//}
-					//model.addAttribute("validationError", errorList);
-					//return "clientcreate";
-				//} else {
-				//}
-
-		user.setId(user.getId());
-		user.setClientname(user.getClientname());
-		user.setMailadd(user.getMailadd());
-		model.addAttribute("user", user);
-		//model.addAttribute("userRequest2", userRequest2);
+		user3.setId(user3.getId());
+		user3.setClientname(user3.getClientname());
+		user2.setMailadd(user2.getMailadd());
+		model.addAttribute("user", user3);
+		model.addAttribute("users", user2);
+		model.addAttribute("Mailadd", Mailadd);
 
 		return "clientedit";
+	}
+
+
+	/**
+	 * 顧客情報更新確認
+	 * @param userRequest リクエストデータ
+	 * @param model Model
+	 * @return ユーザー情報詳細画面
+	 */
+	@GetMapping("/editclient")
+	public String clientEdit(@Validated @ModelAttribute User user, Model model, @RequestParam String clientname,
+			@RequestParam String Mailadd) {
+
+		user.setId(user.getId());
+		user.setClientname(clientname);
+		user.setMailadd(user.getMailadd());
+		model.addAttribute("user", user);
+
+		return "Editclient";
+	}
+
+
+	/**
+	 * 顧客名更新
+	 * @param userRequest リクエストデータ
+	 * @param model Model
+	 * @return ユーザー情報詳細画面
+	 */
+	@RequestMapping(value = "/clientUpdate", method = RequestMethod.POST)
+	public String clientupdate(@ModelAttribute User2 user2,@ModelAttribute User user,@ModelAttribute User3 user3,
+			RedirectAttributes redirectAttribute, BindingResult result, Model model) {
+
+		// ユーザー情報の更新
+		userService.clientupdate(user3);
+		user2.setMailadd(user2.getMailadd());
+		redirectAttribute.addFlashAttribute("user2", user2);
+		return "redirect:/all2";
 	}
 }

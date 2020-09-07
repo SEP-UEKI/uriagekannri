@@ -23,7 +23,7 @@
         <!--<td align="center"th:text="${User.status}"/></td>-->
         <td>
 		<div>
-            <a th:href="@{/user3/{id}/editC(id=${User.id})}" type="button">編集</a>
+            <a th:href="@{/user3/{id}/editC(id=${User.id},mailadd=${user.mailadd})}" type="button">編集</a>
     		<a th:href="@{/user3/{id}/deleteC(id=${User.id})}" type="button">削除</a>
 		</div>
         </td>
@@ -59,11 +59,15 @@
             </ul>
         </div>
 <hr>
-<form action="/clientcreate" th:object="${userRequest2}" th:method="get">
+<form action="/clientcreate" th:object="${user2}" th:method="get">
     <input type="submit" name="newclient" value="顧客登録" style="WIDTH: 250px; HEIGHT: 20px" />
     <input type="hidden" name="newclientname" value="顧客登録">
-    <input type="hidden" name="mailadd" th:value="${loginmail}">
+    <input type="hidden" name="mailadd" th:value="${user.mailadd}">
     <input type="hidden" name="name" th:value="${loginusers}">
+</form>
+<form action="/forindex" th:object="${user}" th:method="get">
+    <input type="submit" name="newclient" value="案件一覧へ" style="WIDTH: 250px; HEIGHT: 20px" />
+    <input type="hidden" name="mailadd"  th:value="${user.mailadd}">
 </form>
 </body>
 </html>

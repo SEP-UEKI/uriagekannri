@@ -16,6 +16,7 @@ public class User3 {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
     private String clientname;
+    private int delete_flg;
 
     public long getId() {
         return id;
@@ -29,5 +30,15 @@ public class User3 {
     public void setClientname(String clientname) {
         this.clientname = clientname;
     }
+    public int getDelete_flg() {
+        return delete_flg;
+    }
+    public void setDelete_flg(int delete_flg) {
+        this.delete_flg = delete_flg;
+    }
+	public void setMailadd(String mailadd) {
+		// TODO 自動生成されたメソッド・スタブ
+
+	}
 
 }

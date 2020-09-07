@@ -6,7 +6,7 @@
   </head>
 <body>
 <h3>製造部売上管理システム：顧客名編集</h3>
-<form th:action="@{/editclient}" th:object="${user}" th:method="post">
+<form th:action="@{/editclient}" th:object="${user}" th:method="get">
 	<table>
          <tr>
                 <th class="cell_title">顧客名</th>
@@ -14,10 +14,10 @@
                  <td><input type="text" th:field="*{clientname}"></td>
             </tr>
  	</table>
- 	<input type="submit"  value="編集確認" class="btn">
+ 	<input type="submit" value="編集確認" class="btn">
 	<input type="button" onClick='history.back();' value="戻る">
-	<input type="hidden"  th:field="*{id}" th:value="${user.id}">
-	<input type="hidden"  th:field="*{mailadd}" th:value="${user.mailadd}">
+	<input type="hidden" th:field="*{id}" th:value="${user.id}">
+	<input type="hidden" name ="Mailadd" th:value="${Mailadd}" >
 	</form>
 </body>
 </html>
