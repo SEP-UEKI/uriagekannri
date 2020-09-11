@@ -540,13 +540,92 @@ public class UserController {
 	 * @param userRequest リクエストデータ
 	 * @param model Model
 	 * @return ユーザー情報詳細画面
-	 */
+
 	@RequestMapping(value = "/clientUpdate", method = RequestMethod.POST)
 	public String clientupdate(@ModelAttribute User2 user2,@ModelAttribute User user,@ModelAttribute User3 user3,
 			RedirectAttributes redirectAttribute, BindingResult result, Model model) {
 
 		// ユーザー情報の更新
 		userService.clientupdate(user3);
+		user2.setMailadd(user2.getMailadd());
+		redirectAttribute.addFlashAttribute("user2", user2);
+		return "redirect:/all2";
+	}
+*/
+
+	/**
+	 * ステータス一覧表示画面表示
+	 * @param user リクエストデータ
+	 * @param model Model
+	 * @return 顧客一覧表示画面
+	 */
+	@RequestMapping(value = "/statusall", method = RequestMethod.GET)
+	public String managementStatus(@Validated User user, @ModelAttribute("user2") User2 user2, @Validated User4 user4,
+			BindingResult result,@ModelAttribute User3 user3, Model model) {
+
+		String Mailadd;
+		Mailadd = user2.getMailadd();
+
+		user.setMailadd(user2.getMailadd());
+		List<User3> purudata = userService.findall();
+
+		model.addAttribute("user", user);
+		model.addAttribute("item", purudata);
+		model.addAttribute("userRequest3", new UserRequest3());
+		return "managementStatus";
+	}
+
+
+	@GetMapping("/statusadd")
+	public String statuscreate(@ModelAttribute UserRequest3 userRequest3, BindingResult result,
+			@Validated User2 user2, User user, Model model) {
+
+		user.setMailadd(user.getMailadd());
+		model.addAttribute("user", user);
+
+		return "Createstatus";
+	}
+
+
+	@GetMapping("/createstatus")
+	public String createstatus(@Validated @ModelAttribute UserRequest3 userRequest3, BindingResult result,
+								User2 user2,User user,User5 user5, Model model) {
+
+		//バリデーションチェック
+		if (result.hasErrors()) {
+			List<String> errorList = new ArrayList<String>();
+			for (ObjectError error : result.getAllErrors()) {
+				errorList.add(error.getDefaultMessage());
+			}
+			model.addAttribute("validationError", errorList);
+			return "Createstatus";
+		} else {
+		}
+
+		userRequest3.setStatus(user5.getStatus());
+		user.setMailadd(user.getMailadd());
+		user.setName( user2.getName());
+
+		model.addAttribute("userRequest3", userRequest3);
+		model.addAttribute("user", user);
+		return "statuscreate";
+
+	}
+
+
+
+	/**
+	 * ステータス登録
+	 * @param userRequest リクエストデータ
+	 * @param model Model
+	 * @return ユーザー情報詳細画面
+	 */
+	@RequestMapping(value = "/statuscreate", method = RequestMethod.POST)
+	public String statusadd(@ModelAttribute User2 user2,@ModelAttribute User user,@ModelAttribute UserRequest3 userRequest3,@ModelAttribute User4 user4,
+			RedirectAttributes redirectAttribute, BindingResult result, Model model) {
+
+		// ユーザー情報の更新
+		userService.statusadd(userRequest3);
 		user2.setMailadd(user2.getMailadd());
 		redirectAttribute.addFlashAttribute("user2", user2);
 		return "redirect:/all2";

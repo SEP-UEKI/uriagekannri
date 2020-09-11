@@ -17,4 +17,7 @@ public class User5 {
     @Column(name = "status")
     private String status;
 
+	@Column(name = "delete_flg")
+    private int delete_flg;
+
 }

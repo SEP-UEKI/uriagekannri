@@ -202,4 +202,17 @@ public class UserService {
         userRepository3.save(user);
     }
 
+
+
+	  /**
+	   * ステータス新規登録
+	   * @param user ユーザー情報
+	   */
+	public void statusadd(UserRequest3 userRequest3) {
+		User5 Cuser = new User5();
+
+		Cuser.setStatus(userRequest3.getStatus());
+		userRepository5.save(Cuser);
+	  }
+
 }

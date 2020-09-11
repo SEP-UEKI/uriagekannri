@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>ステータス管理画面</title>
+<meta charset="utf-8" />
+</head>
+<body>
+プルダウンで顧客を選択することで顧客別管理画面へ移ります
+<form th:action="@{/StatusEdit}" th:object="${userRequest3}" th:method="get">
+	<table>
+		<tr><th class="cell_title">顧客名選択</th>
+			<th class="cell_required">：</th>
+				<td><select id="singleSelect" name="clientname" th:field="*{clientname}">
+    			<option value="none" selected="selected" class="msg">---</option>
+    			<option th:each="item : ${item}" th:value="${item.clientname}" th:text="${item.clientname}" th:class="${item.id}">
+				</select>
+				</td>
+		</tr>
+	</table>
+	<input type="submit" name="statusedit" value="顧客別ステータス編集画面へ" style="WIDTH: 250px; HEIGHT: 20px" />
+    <input type="hidden" name="mailadd" th:value="${user.Mailadd}">
+    <input type="hidden" name="mailadd" th:value="${item.clientname}">
+    <input type="hidden" name="mailadd" th:value="${item.id}">
+</form>
+
+<form action="/statusadd" th:object="${userRequest3}" th:method="get">
+    <input type="submit" name="newstatus" value="ステータス新規登録画面へ" style="WIDTH: 250px; HEIGHT: 20px" />
+    <input type="hidden" name="mailadd" th:value="${user.Mailadd}">
+</form>
+
+</body>
+</html>

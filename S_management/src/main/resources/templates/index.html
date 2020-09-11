@@ -9,7 +9,6 @@ table {border-collapse: collapse;}
 .col_id {width: 50px;}
 .col_name {width: 120px;}
 .col_address {width: 230px;}
-.col_tel {width: 150px;}
 </style>
 </head>
 <body>
@@ -196,24 +195,37 @@ function getNow() {
     <input type="submit" name="newAdd" value="新規登録" style="WIDTH: 250px; HEIGHT: 20px" />
     <input type="hidden" name="newAddress" value="新規登録">
 </form>
-
+<table>
+<td>
 <form action="/clientall" th:object="${userRequest2}" th:method="get">
     <input type="submit" name="newclient" value="顧客管理画面へ" style="WIDTH: 250px; HEIGHT: 20px" />
     <input type="hidden" name="newclientname" value="顧客登録">
     <input type="hidden" name="mailadd" th:value="${loginmail}">
     <input type="hidden" name="name" th:value="${loginusers}">
 </form>
-
+</td>
+<td>
+<form action="/statusall" th:object="${userRequest3}" th:method="get">
+    <input type="submit" name="newstatus" value="ステータス管理画面へ" style="WIDTH: 250px; HEIGHT: 20px" />
+    <input type="hidden" name="mailadd" th:value="${loginmail}">
+    <input type="hidden" name="name" th:value="${loginusers}">
+</form>
+</td>
+</table>
+<table>
+<td>
 <form id="csvform" method="post" th:action="@{/download/csv}">
     <input type="hidden" name="filename"/>
     <button type="submit">CSVファイル出力</button>
 </form>
-
-</form>
+</td>
+<td>
 <form id="csvform" method="post" th:action="@{/download/excel}">
     <input type="hidden" name="filename2"/>
     <button type="submit">excelファイル出力</button>
 </form>
+</td>
+</table>
 
 <form action="/" th:method="get">
  <input type="submit" name="newAdd" value="ログアウト" style="WIDTH: 250px; HEIGHT: 20px" />

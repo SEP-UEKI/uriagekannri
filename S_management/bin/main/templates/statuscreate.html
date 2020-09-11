@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>新規ステータス登録</title>
+    <meta charset="utf-8" />
+  </head>
+<body>
+下記のステータスを登録します。よろしいですか？
+<form th:action="@{/statuscreate}" th:object="${userRequest3}" th:method="post">
+	<table>
+		<tr>
+			<th class="cell_title">ステータス名</th>
+			<th class="cell_required">:</th>
+			<td><span th:text="*{status}" th:field="*{status}"></span></td>
+		</tr>
+	</table>
+	<input type="submit"  value="登録" class="btn">
+	<input type="button" onClick='history.back();' value="戻る">
+	<input type="hidden"  th:field="*{status}" th:value="${status}">
+	<input type="hidden" name ="Mailadd" th:value="${user.Mailadd}" >
+</form>
+</body>
+</html>
