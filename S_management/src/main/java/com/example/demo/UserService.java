@@ -67,6 +67,19 @@ public class UserService {
 	  }
 
 	/**
+	* 顧客別ステータス取得用
+	* @return 検索結果
+	*/
+	public List<User4> SearchUser4(int id) {
+		  List<User4> SearchStatus = userRepository4.findAllByFreeWord(id);
+	    return SearchStatus;
+	  }
+	public List<User3> SearcClient(int id) {
+		  List<User3> SearchClient = userRepository3.findAllByFreeWord(id);
+	    return SearchClient;
+	  }
+
+	/**
 	* CSV出力用検索結果
 	* @return 検索結果
 	*/

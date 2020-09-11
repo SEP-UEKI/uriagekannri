@@ -560,7 +560,7 @@ public class UserController {
 	 * @return 顧客一覧表示画面
 	 */
 	@RequestMapping(value = "/statusall", method = RequestMethod.GET)
-	public String managementStatus(@Validated User user, @ModelAttribute("user2") User2 user2, @Validated User4 user4,
+	public String managementStatus(@ModelAttribute User user, @ModelAttribute("user2") User2 user2, @ModelAttribute User4 user4,
 			BindingResult result,@ModelAttribute User3 user3, Model model) {
 
 		String Mailadd;
@@ -629,5 +629,30 @@ public class UserController {
 		user2.setMailadd(user2.getMailadd());
 		redirectAttribute.addFlashAttribute("user2", user2);
 		return "redirect:/all2";
+	}
+
+
+	/**
+	* 顧客別ステータス管理
+	* @return 検索結果
+	*/
+	@RequestMapping(value = "/StatusEdit", method = RequestMethod.GET)
+	public String StatusEdit(@ModelAttribute User user, BindingResult result,@ModelAttribute User2 user2, BindingResult result2,@ModelAttribute User3 user3,BindingResult result3,
+			@ModelAttribute User4 user4,BindingResult result4,@ModelAttribute UserRequest3 userRequest3,BindingResult result5,Model model) {
+
+		int id = user.getId();
+
+		List<User5> purudata3 = userService.FindAll();
+		List<User4> SearchStatus = userService.SearchUser4(id);
+		List<User3> SearchClient = userService.SearcClient(id);
+
+		//user.setClientname(user3.getClientname());
+		//user.setId(user.getId());
+		//user.setMailadd(user.getMailadd());
+		//model.addAttribute("user", user);
+		model.addAttribute("items", SearchStatus);
+		model.addAttribute("user", SearchClient);
+		model.addAttribute("item", purudata3);
+		return "StatusEdit";
 	}
 }

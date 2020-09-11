@@ -16,7 +16,7 @@ public class User4 {
 
 	@Id
     @Column(name = "id")
-    private long id;
+    private int id;
 
 	@Id
     @Column(name = "branchnum")
