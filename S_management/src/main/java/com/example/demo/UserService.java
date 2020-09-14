@@ -37,6 +37,12 @@ public class UserService {
 	    return logindata;
 	}
 
+	public List<User4> searchuser4(int id,String status) {
+		List<User4> statusCheck = userRepository4.findAllfreeword(status,id);
+
+	    return statusCheck;
+	}
+
 	/**
 	* ユーザー情報 全検索
 	* @return 検索結果

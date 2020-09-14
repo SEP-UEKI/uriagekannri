@@ -638,21 +638,62 @@ public class UserController {
 	*/
 	@RequestMapping(value = "/StatusEdit", method = RequestMethod.GET)
 	public String StatusEdit(@ModelAttribute User user, BindingResult result,@ModelAttribute User2 user2, BindingResult result2,@ModelAttribute User3 user3,BindingResult result3,
-			@ModelAttribute User4 user4,BindingResult result4,@ModelAttribute UserRequest3 userRequest3,BindingResult result5,Model model) {
+			@ModelAttribute User4 user4,BindingResult result4,Model model) {
 
 		int id = user.getId();
+		String Mailadd;
+		Mailadd = user.getMailadd();
+
+		user.setId(user.getId());
 
 		List<User5> purudata3 = userService.FindAll();
 		List<User4> SearchStatus = userService.SearchUser4(id);
 		List<User3> SearchClient = userService.SearcClient(id);
 
-		//user.setClientname(user3.getClientname());
-		//user.setId(user.getId());
-		//user.setMailadd(user.getMailadd());
-		//model.addAttribute("user", user);
 		model.addAttribute("items", SearchStatus);
 		model.addAttribute("user", SearchClient);
 		model.addAttribute("item", purudata3);
+		model.addAttribute("Mailadd", Mailadd);
+		model.addAttribute("users", id);
 		return "StatusEdit";
+	}
+
+
+	/**
+	* ログイン成否画面を表示
+	* @param user リクエストデータ
+	* @param model Model
+	* @return ログイン成否画面
+	*/
+	@RequestMapping(value = "/Editstatus", method = RequestMethod.GET)
+	public String Editstatus(@ModelAttribute User user, @Validated User2 user2, BindingResult result,
+			User4 user4, Model model) {
+
+		int statusid;
+		String status;
+		statusid = user4.getId();
+		status = user4.getStatus();
+		user.setMailadd(user.getMailadd());
+		List<User4> statusCheck = userService.searchuser4(statusid, status);
+
+		if (statusCheck == null || statusCheck.size() == 0) {
+			int id = user.getId();
+
+			List<User5> purudata3 = userService.FindAll();
+			List<User4> SearchStatus = userService.SearchUser4(id);
+			List<User3> SearchClient = userService.SearcClient(id);
+
+			model.addAttribute("items", SearchStatus);
+			model.addAttribute("user", SearchClient);
+			model.addAttribute("item", purudata3);
+			model.addAttribute("statuserror", 0);
+			return "StatusEdit";
+
+		} else {
+			model.addAttribute("user", status);
+			model.addAttribute("user", statusid);
+			model.addAttribute("statusCheck", statusCheck);
+			return "Editstatus";
+		}
 	}
 }

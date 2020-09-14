@@ -6,12 +6,12 @@
 </head>
 <body>
 登録済みのステータスの中から新しく登録するステータスを選んでください
-<form th:action="@{/statuscreate}" th:object="${ValidationForm2}" th:method="get">
+<form th:action="@{/Editstatus}" th:object="${user}" th:method="get">
 	<table>
 		<tr>
 			<th class="cell_title">顧客名</th>
 			<th class="cell_required">:</th>
-			<td><span th:text="${user.clientname}" th:field="${user.clientname}"></span></td>
+			<td><span th:text="${SearchClient}"></span></td>
 		</tr>
 	</table>
 	<table border="1" align="left">
@@ -31,18 +31,18 @@
 		</tr>
 	</table>
 	<table>
+	<div th:if="${loginmiss == 0}" style="color:red;">
+  <p>重複するステータスがあります。入力しなおしてください。</p>
+  </div>
 		<tr>
-			<th class="cell_title">登録するステータス</th>
-			<th class="cell_required">：</th>
-			<td><select id="singleSelect" name="status">
-    		<option value="none" selected="selected" class="msg">---</option>
-    		<option th:each="itemS : ${item}" th:value="${itemS.status}" th:text="${itemS.status}">
-			</select>
-			</td>
+			<th class="cell_title">新規登録ステータス</th>
+			<th class="cell_required">:</th>
+			<td><input type="text" name="status"></td>
 		</tr>
-	</table>
+ 	</table>
 	<input type="submit" name="newstatus" value="登録ステータス確認画面へ" style="WIDTH: 250px; HEIGHT: 20px" />
-	<input type="hidden" name="id" th:value="${user.id}">
+	<input type="hidden" name="id" th:value="${users.id}">
+	<input type="hidden" name ="Mailadd" th:value="${Mailadd}" >
 </form>
 </body>
 </html>

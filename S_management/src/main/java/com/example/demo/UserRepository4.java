@@ -13,4 +13,6 @@ import org.springframework.stereotype.Repository;
 		@Query(value = "SELECT * FROM sales_status WHERE id = :freeWord",nativeQuery = true)
 		List<User4> findAllByFreeWord(@Param("freeWord") int id);
 
+		@Query(value = "SELECT * FROM sales_status WHERE status = :Freeword AND id = :FreeWord",nativeQuery = true)
+		List<User4> findAllfreeword(@Param("Freeword") String status,@Param("FreeWord") int id);
 }
