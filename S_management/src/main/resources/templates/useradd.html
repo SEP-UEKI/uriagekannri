@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>ユーザー新規登録</title>
+<link href="/css/add.css" rel="stylesheet"></link>
+<meta charset="utf-8" />
+</head>
+<body>
+<h3>ユーザー新規登録</h3>
+
+	<table>
+    	<tr th:if="${validationError}" th:each="error : ${validationError}">
+      		<td style="color:red;" th:text="${error}"></td>
+    	</tr>
+  	</table>
+	<form th:action="@{/newuser}" th:object="${userRequest3}" th:method="get">
+		<table>
+			<tr>
+				<th class="cell_title">ユーザー名</th>
+				<th class="cell_required">：</th>
+				<td><input type="text" th:field="*{name}"></td>
+			</tr>
+			<tr>
+				<th class="cell_title">メールアドレス</th>
+				<th class="cell_required">：</th>
+				<td><input type="text" th:field="*{mailadd}"></td>
+			</tr>
+		</table>
+		<input type="submit"  value="ユーザー新規登録確認画面へ" class="btn">
+		<input type="button" onClick='history.back();' value="戻る">
+	</form>
+</body>
+</html>

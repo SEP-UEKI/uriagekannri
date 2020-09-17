@@ -52,6 +52,11 @@ public class UserService {
 	    return wordPage;
 	  }
 
+	public List<User2> findALL() {
+		  List<User2> alluser = userRepository2.findAll();
+	    return alluser;
+	  }
+
 	public Page<User3> searchclient(Pageable pageable) {
 		  Page<User3> wordPage = userRepository3.findAll(pageable);
 	    return wordPage;
@@ -227,11 +232,25 @@ public class UserService {
 	   * ステータス新規登録
 	   * @param user ユーザー情報
 	   */
-	public void statusadd(UserRequest3 userRequest3) {
+	public void statusadd(UserRequest userRequest) {
 		User5 Cuser = new User5();
 
-		Cuser.setStatus(userRequest3.getStatus());
+		Cuser.setStatus(userRequest.getStatus());
 		userRepository5.save(Cuser);
 	  }
+
+
+	 /**
+     * 顧客別ステータス新規登録
+     * @param user ユーザー情報
+     */
+    public void statusUpdata(User4 user4) {
+    	User4 user = new User4();
+
+        user.setId(user4.getId());
+        user.setBranchnum(0);
+        user.setStatus(user4.getStatus());
+        userRepository4.save(user);
+    }
 
 }

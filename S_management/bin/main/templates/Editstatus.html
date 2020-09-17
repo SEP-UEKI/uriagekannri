@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<title>顧客別ステータス登録確認画面</title>
+<meta charset="utf-8" />
 </head>
 <body>
-
+<h1>顧客名編集</h1>
+下記のステータスを登録します。よろしいですか？
+	<form th:action="@{/clientUpdate}" th:object="${user}" th:method="post">
+		<table>
+			<tr>
+				<th class="cell_title">ステータス</th>
+				<th class="cell_required">:</th>
+				<td><span th:text="${status}"></span></td>
+			</tr>
+		</table>
+		<input type="submit"  value="登録" class="btn">
+		<input type="button" onClick='history.back();' value="戻る">
+		<input type="hidden"  name="id" th:value="${id}">
+		<input type="hidden"  name="status" th:value="${status}">
+		<input type="hidden"  th:field="*{Mailadd}" th:value="${Mailadd}">
+	</form>
 </body>
 </html>

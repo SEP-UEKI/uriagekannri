@@ -211,6 +211,13 @@ function getNow() {
     <input type="hidden" name="name" th:value="${loginusers}">
 </form>
 </td>
+<td>
+<form action="/userall" th:object="${user}" th:method="get">
+    <input type="submit" name="newuser" value="ユーザー管理画面へ" style="WIDTH: 250px; HEIGHT: 20px" />
+    <input type="hidden" name="mailadd" th:value="${loginmail}">
+    <input type="hidden" name="name" th:value="${loginusers}">
+</form>
+</td>
 </table>
 <table>
 <td>

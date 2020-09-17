@@ -588,7 +588,7 @@ public class UserController {
 
 
 	@GetMapping("/createstatus")
-	public String createstatus(@Validated @ModelAttribute UserRequest3 userRequest3, BindingResult result,
+	public String createstatus(@Validated @ModelAttribute UserRequest userRequest, BindingResult result,
 								User2 user2,User user,User5 user5, Model model) {
 
 		//バリデーションチェック
@@ -602,11 +602,11 @@ public class UserController {
 		} else {
 		}
 
-		userRequest3.setStatus(user5.getStatus());
+		userRequest.setStatus(user5.getStatus());
 		user.setMailadd(user.getMailadd());
 		user.setName( user2.getName());
 
-		model.addAttribute("userRequest3", userRequest3);
+		model.addAttribute("userRequest3", userRequest);
 		model.addAttribute("user", user);
 		return "statuscreate";
 
@@ -621,11 +621,11 @@ public class UserController {
 	 * @return ユーザー情報詳細画面
 	 */
 	@RequestMapping(value = "/statuscreate", method = RequestMethod.POST)
-	public String statusadd(@ModelAttribute User2 user2,@ModelAttribute User user,@ModelAttribute UserRequest3 userRequest3,@ModelAttribute User4 user4,
+	public String statusadd(@ModelAttribute User2 user2,@ModelAttribute User user,@ModelAttribute UserRequest userRequest,@ModelAttribute User4 user4,
 			RedirectAttributes redirectAttribute, BindingResult result, Model model) {
 
 		// ユーザー情報の更新
-		userService.statusadd(userRequest3);
+		userService.statusadd(userRequest);
 		user2.setMailadd(user2.getMailadd());
 		redirectAttribute.addFlashAttribute("user2", user2);
 		return "redirect:/all2";
@@ -638,23 +638,25 @@ public class UserController {
 	*/
 	@RequestMapping(value = "/StatusEdit", method = RequestMethod.GET)
 	public String StatusEdit(@ModelAttribute User user, BindingResult result,@ModelAttribute User2 user2, BindingResult result2,@ModelAttribute User3 user3,BindingResult result3,
-			@ModelAttribute User4 user4,BindingResult result4,Model model) {
+			@ModelAttribute User4 user4,BindingResult result4,@ModelAttribute User users,Model model) {
 
 		int id = user.getId();
 		String Mailadd;
 		Mailadd = user.getMailadd();
 
-		user.setId(user.getId());
-
 		List<User5> purudata3 = userService.FindAll();
 		List<User4> SearchStatus = userService.SearchUser4(id);
 		List<User3> SearchClient = userService.SearcClient(id);
 
+		String clientname;
+		clientname = user3.getClientname();
+
 		model.addAttribute("items", SearchStatus);
-		model.addAttribute("user", SearchClient);
+		model.addAttribute("user3", SearchClient);
 		model.addAttribute("item", purudata3);
 		model.addAttribute("Mailadd", Mailadd);
 		model.addAttribute("users", id);
+		model.addAttribute("clientname", clientname);
 		return "StatusEdit";
 	}
 
@@ -666,17 +668,17 @@ public class UserController {
 	* @return ログイン成否画面
 	*/
 	@RequestMapping(value = "/Editstatus", method = RequestMethod.GET)
-	public String Editstatus(@ModelAttribute User user, @Validated User2 user2, BindingResult result,
-			User4 user4, Model model) {
+	public String Editstatus(@ModelAttribute User user, BindingResult result,@ModelAttribute User2 user2, BindingResult result2,@ModelAttribute User3 user3,BindingResult result3,
+			@ModelAttribute User4 user4,BindingResult result4,Model model) {
 
 		int statusid;
 		String status;
-		statusid = user4.getId();
-		status = user4.getStatus();
+		statusid = user.getId();
+		status = user.getStatus();
 		user.setMailadd(user.getMailadd());
 		List<User4> statusCheck = userService.searchuser4(statusid, status);
 
-		if (statusCheck == null || statusCheck.size() == 0) {
+		if (!(statusCheck == null || statusCheck.size() == 0)){
 			int id = user.getId();
 
 			List<User5> purudata3 = userService.FindAll();
@@ -690,10 +692,92 @@ public class UserController {
 			return "StatusEdit";
 
 		} else {
-			model.addAttribute("user", status);
-			model.addAttribute("user", statusid);
+			model.addAttribute("status", status);
+			model.addAttribute("id", statusid);
 			model.addAttribute("statusCheck", statusCheck);
 			return "Editstatus";
 		}
+	}
+
+
+	/**
+	 * ステータス登録
+	 * @param userRequest リクエストデータ
+	 * @param model Model
+	 * @return ユーザー情報詳細画面
+	 */
+	@RequestMapping(value = "/clientUpdate", method = RequestMethod.POST)
+	public String statusupdata(@ModelAttribute User2 user2,@ModelAttribute User user,@ModelAttribute User4 user4,
+			RedirectAttributes redirectAttribute, BindingResult result, Model model) {
+
+		// ユーザー情報の更新
+		userService.statusUpdata(user4);
+		user2.setMailadd(user2.getMailadd());
+		redirectAttribute.addFlashAttribute("user2", user2);
+		return "redirect:/all2";
+	}
+
+
+	/**
+	 * 登録ユーザー一覧表示画面表示
+	 * @param user リクエストデータ
+	 * @param model Model
+	 * @return 顧客一覧表示画面
+	 */
+	@RequestMapping(value = "/userall", method = RequestMethod.GET)
+	public String useredit(@Validated User user, User2 user2, @Validated User4 user4,
+			BindingResult result,@ModelAttribute UserRequest3 userRequest3,
+			@ModelAttribute User3 user3, Model model) {
+
+		String Mailadd;
+		Mailadd = user2.getMailadd();
+
+		user.setMailadd(user2.getMailadd());
+		List<User2> alluser = userService.findALL();
+
+		model.addAttribute("user", new User());
+		model.addAttribute("alluser", alluser);
+		model.addAttribute("Mailadd", Mailadd);
+		return "userindex";
+	}
+
+
+	/**
+	 * 新規ユーザー画面表示
+	 * @param user リクエストデータ
+	 * @param model Model
+	 * @return 新規登録画面表示
+	 */
+	@GetMapping(value = "/useradd")
+	public String displayuserAdd(@ModelAttribute User user, @ModelAttribute User2 user2, @ModelAttribute User4 user4,
+	BindingResult result,@ModelAttribute UserRequest3 userRequest3,
+	@ModelAttribute User3 user3, Model model) {
+
+		model.addAttribute("userRequest3", new UserRequest3());
+		return "useradd";
+	}
+
+
+	@GetMapping("/newuser")
+	public String createneruser(@Validated @ModelAttribute UserRequest3 userRequest3, BindingResult result,
+			@ModelAttribute User user, @ModelAttribute User2 user2, @ModelAttribute User4 user4, Model model) {
+
+		//バリデーションチェック
+		if (result.hasErrors()) {
+			List<String> errorList = new ArrayList<String>();
+			for (ObjectError error : result.getAllErrors()) {
+				errorList.add(error.getDefaultMessage());
+			}
+			model.addAttribute("validationError", errorList);
+			return "useradd";
+		} else {
+		}
+
+		user.setId(user4.getId());
+		user.setClientname(userRequest3.getName());
+		user.setMailadd(userRequest3.getMailadd());
+		model.addAttribute("user", user);
+
+		return "CreateUser";
 	}
 }

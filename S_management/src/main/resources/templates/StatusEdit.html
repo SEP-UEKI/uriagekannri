@@ -11,7 +11,7 @@
 		<tr>
 			<th class="cell_title">顧客名</th>
 			<th class="cell_required">:</th>
-			<td><span th:text="${SearchClient}"></span></td>
+			<td><span th:text="${clientname}"></span></td>
 		</tr>
 	</table>
 	<table border="1" align="left">
@@ -31,7 +31,7 @@
 		</tr>
 	</table>
 	<table>
-	<div th:if="${loginmiss == 0}" style="color:red;">
+	<div th:if="${statuserror == 0}" style="color:red;">
   <p>重複するステータスがあります。入力しなおしてください。</p>
   </div>
 		<tr>
@@ -41,7 +41,7 @@
 		</tr>
  	</table>
 	<input type="submit" name="newstatus" value="登録ステータス確認画面へ" style="WIDTH: 250px; HEIGHT: 20px" />
-	<input type="hidden" name="id" th:value="${users.id}">
+	<input type="hidden" name="id" th:value="${users}">
 	<input type="hidden" name ="Mailadd" th:value="${Mailadd}" >
 </form>
 </body>
