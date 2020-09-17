@@ -169,6 +169,15 @@ public class UserService {
      * ユーザー情報 主キー検索
      * @return 検索結果
      */
+    public User2 FindByid(long id) {
+        return userRepository2.findById(id).get();
+    }
+
+
+    /**
+     * ユーザー情報 主キー検索
+     * @return 検索結果
+     */
     public User3 findByid(long id) {
         return userRepository3.findById(id).get();
     }
@@ -176,8 +185,8 @@ public class UserService {
 
 
     /**
-     * ユーザー情報 更新
-     * @param user ユーザー情報
+     * 案件情報 更新
+     * @param user 案件情報
      */
     public void update(User user) {
         User user2 = findById(user.getId());
@@ -218,7 +227,7 @@ public class UserService {
      * 顧客名 更新
      * @param user ユーザー情報
      */
-    public void clientupdate(User3 user3) {
+    public void ClientUpdate(User3 user3) {
         User3 user = findByid(user3.getId());
 
         user.setClientname(user.getClientname());
@@ -232,10 +241,11 @@ public class UserService {
 	   * ステータス新規登録
 	   * @param user ユーザー情報
 	   */
-	public void statusadd(UserRequest userRequest) {
+	public void statusadd(UserRequest4 userRequest4) {
 		User5 Cuser = new User5();
 
-		Cuser.setStatus(userRequest.getStatus());
+		Cuser.setStatus(userRequest4.getStatus());
+		Cuser.setDelete_flg(0);
 		userRepository5.save(Cuser);
 	  }
 
@@ -252,5 +262,48 @@ public class UserService {
         user.setStatus(user4.getStatus());
         userRepository4.save(user);
     }
+
+
+
+	  /**
+	   * ユーザー 新規登録
+	   * @param user ユーザー情報
+	   */
+	public void createU(User2 user2) {
+		User2 Cuser = new User2();
+
+		Cuser.setName(user2.getName());
+		Cuser.setMailadd(user2.getMailadd());
+		Cuser.setDelete_flg(0);
+		userRepository2.save(Cuser);
+	  }
+
+
+
+    /**
+     * ユーザー情報 更新
+     * @param user 案件情報
+     */
+    public void UserinfUpdate(User2 user2) {
+
+        user2.setName(user2.getName());
+        user2.setMailadd(user2.getMailadd());
+        user2.setDelete_flg(0);
+        userRepository2.save(user2);
+    }
+
+
+    /**
+     * ユーザー情報 更新
+     * @param user 案件情報
+     */
+    public void UserinfDelete(User2 user2) {
+
+        user2.setName(user2.getName());
+        user2.setMailadd(user2.getMailadd());
+        user2.setDelete_flg(1);
+        userRepository2.save(user2);
+    }
+
 
 }

@@ -5,13 +5,13 @@
 <meta charset="utf-8" />
 </head>
 <body>
+売上管理システム:登録ユーザー一覧
 <table border="1">
     <tr>
     	<th bgcolor="#bfefdf" class="col_id">ID</th>
         <th bgcolor="#bfefdf" class="col_clientname">ユーザー名</th>
         <th bgcolor="#bfefdf" class="col_day">メールアドレス</th>
-        <th bgcolor="#bfefdf"></th>
-        <th bgcolor="#bfefdf"></th>
+        <th bgcolor="#bfefdf">編集/削除</th>
     </tr>
     <tr th:block th:each="User : ${alluser}">
     	<td th:text="${User.id}"/></td>
@@ -19,14 +19,14 @@
         <td align="center" th:text="${User.mailadd}"/></td>
         <td>
 		<div>
-            <a th:href="@{/user/{id}/edit(id=${User.id})}" type="button">編集</a>
-    		<a th:href="@{/user/{id}/delete(id=${User.id})}" type="button">削除</a>
+            <a th:href="@{/user2/{id}/Uedit(id=${User.id})}" type="button">編集</a>
+    		<a th:href="@{/user2/{id}/Udelete(id=${User.id})}" type="button">削除</a>
 		</div>
         </td>
     </tr>
 </table>
 <form action="/useradd" th:object="${user}" th:method="get">
-    <input type="submit" name="newclient" value="顧客管理画面へ" style="WIDTH: 250px; HEIGHT: 20px" />
+    <input type="submit" name="newclient" value="ユーザー新規登録画面へ" style="WIDTH: 250px; HEIGHT: 20px" />
     <input type="hidden" name="newclientname" value="顧客登録">
 </form>
 </body>

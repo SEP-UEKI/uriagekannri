@@ -8,24 +8,25 @@
 </head>
 <body>
 <h3>ユーザー新規登録</h3>
-
-	<table>
-    	<tr th:if="${validationError}" th:each="error : ${validationError}">
-      		<td style="color:red;" th:text="${error}"></td>
-    	</tr>
-  	</table>
+ユーザー名とメールアドレスを入力してください。(必須)
 	<form th:action="@{/newuser}" th:object="${userRequest3}" th:method="get">
 		<table>
+		<div>
 			<tr>
 				<th class="cell_title">ユーザー名</th>
 				<th class="cell_required">：</th>
-				<td><input type="text" th:field="*{name}"></td>
+				<td><input type="text" th:field="*{name}">
+				<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: red"></span></td>
 			</tr>
+		</div>
+		<div>
 			<tr>
 				<th class="cell_title">メールアドレス</th>
 				<th class="cell_required">：</th>
-				<td><input type="text" th:field="*{mailadd}"></td>
+				<td><input type="text" th:field="*{mailadd}">
+				<span th:if="${#fields.hasErrors('mailadd')}" th:errors="*{mailadd}" style="color: red"></span></td>
 			</tr>
+		</div>
 		</table>
 		<input type="submit"  value="ユーザー新規登録確認画面へ" class="btn">
 		<input type="button" onClick='history.back();' value="戻る">

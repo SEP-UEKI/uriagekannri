@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>顧客登録</title>
+    <meta charset="utf-8" />
+  </head>
+<body>
+下記ユーザーを削除します。よろしいですか？
+	<form th:action="@{/DeleteUserinf}" th:object="${user2}" th:method="post">
+		<table>
+			<tr>
+				<th class="cell_title">顧客名</th>
+				<th class="cell_required">:</th>
+				 <td><span th:text="${user2.name}" name="name"></span></td>
+			</tr>
+			<tr>
+				<th class="cell_title">メールアドレス</th>
+				<th class="cell_required">:</th>
+				 <td><span th:text="${user2.mailadd}" name="mailadd"></span></td>
+			</tr>
+		</table>
+	<input type="submit"  value="削除" class="btn">
+	<input type="button" onClick='history.back();' value="戻る">
+	<input type="hidden" name ="id" th:value="${user2.id}" >
+	<input type="hidden" name ="name" th:value="${user2.name}" >
+	<input type="hidden" name ="mailadd" th:value="${user2.mailadd}" >
+</form>
+</body>
+</html>

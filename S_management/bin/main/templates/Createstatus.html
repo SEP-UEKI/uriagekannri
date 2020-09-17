@@ -6,12 +6,13 @@
 </head>
 <body>
 登録する新規ステータス名を7文字以内で入力してください
-<form th:action="@{/createstatus}" th:object="${userRequest3}" th:method="get">
+<form th:action="@{/createstatus}" th:object="${userRequest4}" th:method="get">
 	<table>
          <tr>
                 <th class="cell_title">ステータス名</th>
                 <th class="cell_required">:</th>
-                 <td><input type="text" th:field="*{status}"></td>
+                 <td><input type="text" th:field="*{status}">
+                 <span th:if="${#fields.hasErrors('status')}" th:errors="*{status}" style="color: red"></span></td>
             </tr>
  	</table>
  	<input type="submit" value="登録確認" class="btn">

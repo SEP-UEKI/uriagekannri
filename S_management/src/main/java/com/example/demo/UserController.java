@@ -540,18 +540,18 @@ public class UserController {
 	 * @param userRequest リクエストデータ
 	 * @param model Model
 	 * @return ユーザー情報詳細画面
-
+	 */
 	@RequestMapping(value = "/clientUpdate", method = RequestMethod.POST)
 	public String clientupdate(@ModelAttribute User2 user2,@ModelAttribute User user,@ModelAttribute User3 user3,
 			RedirectAttributes redirectAttribute, BindingResult result, Model model) {
 
 		// ユーザー情報の更新
-		userService.clientupdate(user3);
+		userService.ClientUpdate(user3);
 		user2.setMailadd(user2.getMailadd());
 		redirectAttribute.addFlashAttribute("user2", user2);
 		return "redirect:/all2";
 	}
-*/
+
 
 	/**
 	 * ステータス一覧表示画面表示
@@ -577,18 +577,19 @@ public class UserController {
 
 
 	@GetMapping("/statusadd")
-	public String statuscreate(@ModelAttribute UserRequest3 userRequest3, BindingResult result,
+	public String statuscreate(@ModelAttribute UserRequest4 userRequest4, BindingResult result,
 			@Validated User2 user2, User user, Model model) {
 
 		user.setMailadd(user.getMailadd());
 		model.addAttribute("user", user);
+		model.addAttribute("userRequest4", new UserRequest4());
 
 		return "Createstatus";
 	}
 
 
 	@GetMapping("/createstatus")
-	public String createstatus(@Validated @ModelAttribute UserRequest userRequest, BindingResult result,
+	public String createstatus(@Validated @ModelAttribute UserRequest4 userRequest4, BindingResult result,
 								User2 user2,User user,User5 user5, Model model) {
 
 		//バリデーションチェック
@@ -602,11 +603,11 @@ public class UserController {
 		} else {
 		}
 
-		userRequest.setStatus(user5.getStatus());
+		userRequest4.setStatus(user5.getStatus());
 		user.setMailadd(user.getMailadd());
 		user.setName( user2.getName());
 
-		model.addAttribute("userRequest3", userRequest);
+		model.addAttribute("userRequest4", userRequest4);
 		model.addAttribute("user", user);
 		return "statuscreate";
 
@@ -621,11 +622,11 @@ public class UserController {
 	 * @return ユーザー情報詳細画面
 	 */
 	@RequestMapping(value = "/statuscreate", method = RequestMethod.POST)
-	public String statusadd(@ModelAttribute User2 user2,@ModelAttribute User user,@ModelAttribute UserRequest userRequest,@ModelAttribute User4 user4,
+	public String statusadd(@ModelAttribute User2 user2,@ModelAttribute User user,@ModelAttribute UserRequest4 userRequest4,@ModelAttribute User4 user4,
 			RedirectAttributes redirectAttribute, BindingResult result, Model model) {
 
 		// ユーザー情報の更新
-		userService.statusadd(userRequest);
+		userService.statusadd(userRequest4);
 		user2.setMailadd(user2.getMailadd());
 		redirectAttribute.addFlashAttribute("user2", user2);
 		return "redirect:/all2";
@@ -662,7 +663,7 @@ public class UserController {
 
 
 	/**
-	* ログイン成否画面を表示
+	* ステータス入力チェック
 	* @param user リクエストデータ
 	* @param model Model
 	* @return ログイン成否画面
@@ -706,7 +707,7 @@ public class UserController {
 	 * @param model Model
 	 * @return ユーザー情報詳細画面
 	 */
-	@RequestMapping(value = "/clientUpdate", method = RequestMethod.POST)
+	@RequestMapping(value = "/statusUpdate", method = RequestMethod.POST)
 	public String statusupdata(@ModelAttribute User2 user2,@ModelAttribute User user,@ModelAttribute User4 user4,
 			RedirectAttributes redirectAttribute, BindingResult result, Model model) {
 
@@ -743,7 +744,7 @@ public class UserController {
 
 
 	/**
-	 * 新規ユーザー画面表示
+	 * 新規ユーザー登録画面表示
 	 * @param user リクエストデータ
 	 * @param model Model
 	 * @return 新規登録画面表示
@@ -758,8 +759,14 @@ public class UserController {
 	}
 
 
+	/**
+	 * 新規ユーザー登録確認画面表示及び入力チェック
+	 * @param user リクエストデータ
+	 * @param model Model
+	 * @return 新規登録画面表示
+	 */
 	@GetMapping("/newuser")
-	public String createneruser(@Validated @ModelAttribute UserRequest3 userRequest3, BindingResult result,
+	public String createnewuser(@Validated @ModelAttribute UserRequest3 userRequest3, BindingResult result,
 			@ModelAttribute User user, @ModelAttribute User2 user2, @ModelAttribute User4 user4, Model model) {
 
 		//バリデーションチェック
@@ -773,11 +780,146 @@ public class UserController {
 		} else {
 		}
 
-		user.setId(user4.getId());
-		user.setClientname(userRequest3.getName());
-		user.setMailadd(userRequest3.getMailadd());
-		model.addAttribute("user", user);
+		user2.setName(user2.getName());
+		user2.setMailadd(user2.getMailadd());
+		model.addAttribute("user2", user2);
 
-		return "CreateUser";
+		return "NewUser";
 	}
+
+
+	/**
+	 * 新規ユーザー登録
+	 * @param user リクエストデータ
+	 * @param model Model
+	 * @return 案件一覧表示
+	 */
+	@RequestMapping(value = "/NewUserCreate", method = RequestMethod.POST)
+	public String NewUser( @ModelAttribute User2 user2, @ModelAttribute User user,
+			@RequestParam String name,@RequestParam String mailadd,BindingResult result, Model model) {
+
+		user2.setName(name);
+		user2.setMailadd(mailadd);
+
+		// ユーザー情報の登録
+		userService.createU(user2);
+		return "login";
+	}
+
+
+
+	/**
+	 * ユーザー編集画面を表示
+	 * @param id 表示するユーザーID
+	 * @param model Model
+	 * @return ユーザー編集画面
+	 */
+	@GetMapping("/user2/{id}/Uedit")
+	public String displayUEdit(@PathVariable long id,@ModelAttribute UserRequest3 userRequest3, BindingResult result,
+			@ModelAttribute User2 user2,@ModelAttribute User user,Model model) {
+		user2 = userService.FindByid(id);
+
+		user2.setId(user2.getId());
+		user2.setName(user2.getName());
+		user2.setMailadd(user2.getMailadd());
+		model.addAttribute("userRequest3", user2);
+		//model.addAttribute("userRequest3", new UserRequest3());
+
+		return "UserinfEdit";
+	}
+
+
+	/**
+	 * 新規ユーザー登録確認画面表示及び入力チェック
+	 * @param user リクエストデータ
+	 * @param model Model
+	 * @return 新規登録画面表示
+	 */
+	@GetMapping("/EditUserinf")
+	public String Edituserinf(@Validated @ModelAttribute UserRequest3 userRequest3, BindingResult result,@RequestParam String name,@RequestParam String mailadd,
+			@ModelAttribute User user, @ModelAttribute User2 user2, @ModelAttribute User4 user4, Model model) {
+
+		//バリデーションチェック
+		if (result.hasErrors()) {
+			List<String> errorList = new ArrayList<String>();
+			for (ObjectError error : result.getAllErrors()) {
+				errorList.add(error.getDefaultMessage());
+			}
+			model.addAttribute("validationError", errorList);
+			return "UserinfEdit";
+		} else {
+		}
+
+		user2.setId(user2.getId());
+		user2.setName(name);
+		user2.setMailadd(mailadd);
+		model.addAttribute("user2", user2);
+
+		return "EditUserinf";
+	}
+
+
+	/**
+	 * ユーザー情報更新
+	 * @param userRequest リクエストデータ
+	 * @param model Model
+	 * @return ユーザー情報詳細画面
+	 */
+	@RequestMapping(value = "/NewUserinf", method = RequestMethod.POST)
+	public String UserinfUpdate(@Validated User2 user2,@ModelAttribute User user,@ModelAttribute UserRequest3 userRequest3,
+			@RequestParam String name,@RequestParam String mailadd,@RequestParam long id, RedirectAttributes redirectAttribute, BindingResult result, Model model) {
+
+		// ユーザー情報の更新
+
+		user2.setId(id);
+		user2.setName(name);
+		user2.setMailadd(mailadd);
+		userService.UserinfUpdate(user2);
+		redirectAttribute.addFlashAttribute("user2", user2);
+		return "redirect:/all2";
+	}
+
+
+
+	/**
+	 * ユーザー削除確認画面を表示
+	 * @param id 表示するユーザーID
+	 * @param model Model
+	 * @return ユーザー編集画面
+	 */
+	@GetMapping("/user2/{id}/Udelete")
+	public String Userinfdelete(@PathVariable long id,@ModelAttribute User2 user2,
+			@ModelAttribute User user,BindingResult result,Model model) {
+		user2 = userService.FindByid(id);
+
+		user2.setId(user2.getId());
+		user2.setName(user2.getName());
+		user2.setMailadd(user2.getMailadd());
+		model.addAttribute("user2", user2);
+
+		return "UserinfDelete";
+	}
+
+
+	/**
+	 * ユーザー情報削除
+	 * @param userRequest リクエストデータ
+	 * @param model Model
+	 * @return ユーザー情報詳細画面
+	 */
+	@RequestMapping(value = "/DeleteUserinf", method = RequestMethod.POST)
+	public String UserinfDelete(@Validated User2 user2,@ModelAttribute User user,@ModelAttribute UserRequest3 userRequest3,
+			@RequestParam String name,@RequestParam String mailadd,@RequestParam long id, RedirectAttributes redirectAttribute, BindingResult result, Model model) {
+
+		// ユーザー情報の削除
+
+		user2.setId(id);
+		user2.setName(name);
+		user2.setMailadd(mailadd);
+		userService.UserinfDelete(user2);
+		redirectAttribute.addFlashAttribute("user2", user2);
+		return "login";
+	}
+
+
 }

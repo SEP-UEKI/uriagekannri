@@ -15,6 +15,7 @@ import lombok.Data;
 @Data
 public class UserRequest3 implements Serializable {
 
+	@NotBlank(message = "ユーザー名を入力してください")
 	@Size(max = 10, message = "ユーザー名は10桁以内で入力してください")
 	private String name;
 

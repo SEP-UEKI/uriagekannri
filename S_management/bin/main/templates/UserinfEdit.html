@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>ユーザー情報編集</title>
+    <meta charset="utf-8" />
+  </head>
+<body>
+売上管理システム:登録ユーザー情報編集
+<form th:action="@{/EditUserinf}" th:object="${userRequest3}" th:method="get">
+	<table>
+		<tr>
+			<th class="cell_title">ユーザー名</th>
+			<th class="cell_required">:</th>
+			<td><input type="text" th:value="*{name}" th:field="*{name}">
+			<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: red"></span></td>
+		</tr>
+		<tr>
+			<th class="cell_title">メールアドレス</th>
+			<th class="cell_required">:</th>
+			<td><input type="text" th:value="*{mailadd}" th:field="*{mailadd}">
+			<span th:if="${#fields.hasErrors('mailadd')}" th:errors="*{mailadd}" style="color: red"></span></td>
+		</tr>
+ 	</table>
+ 	<input type="submit" value="ユーザー編集確認" class="btn">
+	<input type="button" onClick='history.back();' value="戻る">
+	<input type="hidden" name="id" th:value="${user2.id}">
+	</form>
+</body>
+</html>
