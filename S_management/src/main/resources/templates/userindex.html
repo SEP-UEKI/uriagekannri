@@ -20,7 +20,8 @@
         <td>
 		<div>
             <a th:href="@{/user2/{id}/Uedit(id=${User.id})}" type="button">編集</a>
-    		<a th:href="@{/user2/{id}/Udelete(id=${User.id})}" type="button">削除</a>
+            <a th:if="${User.adomin == 0}">
+            <a th:href="@{/user2/{id}/Udelete(id=${User.id})}" type="button">削除</a></a>
 		</div>
         </td>
     </tr>

@@ -18,11 +18,17 @@
 				<th class="cell_required">:</th>
 				 <td><span th:text="${user2.mailadd}" name="mailadd"></span></td>
 			</tr>
+			<tr>
+				<th class="cell_title">ユーザー権限</th>
+				<th class="cell_required">:</th>
+				 <td><span th:text="${adomininf}"></span></td>
+			</tr>
 		</table>
 	<input type="submit"  value="登録" class="btn">
 	<input type="button" onClick='history.back();' value="戻る">
 	<input type="hidden" name ="name" th:value="${user2.name}" >
-	<input type="hidden" name ="mailadd" th:value="${user2.mailadd}" >
+	<input type="hidden" name ="mailadd" th:value="${user2.mailadd}">
+	<input type="hidden" name ="adomin" th:value="${user2.adomin}">
 </form>
 </body>
 </html>

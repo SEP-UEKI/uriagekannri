@@ -23,4 +23,8 @@ public class UserRequest3 implements Serializable {
 	@Size(max = 20, message = "メールアドレスは20桁以内で入力してください")
 	@Email(message = "「@」を含む20桁以内のメールアドレスの形式で入力してください")
 	private String mailadd;
+
+
+	//@NotBlank(message = "ユーザー権限を選択してください")
+	private int adomin;
 }

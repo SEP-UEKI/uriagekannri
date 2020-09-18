@@ -65,7 +65,9 @@ public class UserController {
 			return "login";
 
 		} else {
+			User2 adomin = logindata.get(0);
 			model.addAttribute("logindata", logindata);
+			model.addAttribute("adomin", adomin);
 			return "loginpage";
 		}
 	}
@@ -78,7 +80,7 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public String getAllUsers(@Validated User user, @Validated User2 user2, @Validated User4 user4,
-			BindingResult result,
+			BindingResult result,@RequestParam int adomin,
 			@PageableDefault(size = 10) Pageable pageable,
 			Model model) {
 
@@ -86,6 +88,7 @@ public class UserController {
 		String Logmail;
 		Logname = user2.getName();
 		Logmail = user2.getMailadd();
+		user2.setAdomin(adomin);
 
 		List<User3> purudata = userService.findall();
 		List<User4> purudata2 = userService.findAll();
@@ -98,6 +101,7 @@ public class UserController {
 		model.addAttribute("loginmail", Logmail);
 		model.addAttribute("item", purudata);
 		model.addAttribute("items", purudata2);
+		model.addAttribute("user2", user2);
 		return "index";
 	}
 
@@ -167,7 +171,7 @@ public class UserController {
 	/**
 	 * プルダウンvalue
 	 * @return それぞれ
-	 */
+
 	private Map<String, String> getSelectedItems() {
 		Map<String, String> selectMap = new LinkedHashMap<String, String>();
 		selectMap.put("key_A", "ビールシステム");
@@ -185,6 +189,17 @@ public class UserController {
 		selectMap.put("key_E", "見積済み");
 		selectMap.put("key_F", "製造完了");
 		return selectMap;
+	} */
+
+	/**
+	 * ラジオボタンvalue
+	 * @return それぞれ
+	 */
+	private Map<String,String> getRadioItems(){
+	     Map<String, String> selectMap = new LinkedHashMap<String, String>();
+	     selectMap.put("1", "管理者ユーザー");
+	     selectMap.put("0", "一般ユーザー");
+	     return selectMap;
 	}
 
 	/**
@@ -207,8 +222,6 @@ public class UserController {
 
 		//model.addAttribute("user", new User());
 		model.addAttribute("userRequest", new UserRequest());
-		model.addAttribute("selectItems", getSelectedItems());
-		model.addAttribute("selectItems2", getSelectedItems2());
 		model.addAttribute("Mailadd", Mailadd);
 		model.addAttribute("Name", Name);
 		model.addAttribute("item", purudata);
@@ -754,6 +767,7 @@ public class UserController {
 	BindingResult result,@ModelAttribute UserRequest3 userRequest3,
 	@ModelAttribute User3 user3, Model model) {
 
+		model.addAttribute("radioItems",getRadioItems());
 		model.addAttribute("userRequest3", new UserRequest3());
 		return "useradd";
 	}
@@ -767,7 +781,9 @@ public class UserController {
 	 */
 	@GetMapping("/newuser")
 	public String createnewuser(@Validated @ModelAttribute UserRequest3 userRequest3, BindingResult result,
-			@ModelAttribute User user, @ModelAttribute User2 user2, @ModelAttribute User4 user4, Model model) {
+			@RequestParam int adomin,@ModelAttribute User user, @ModelAttribute User2 user2, @ModelAttribute User4 user4, Model model) {
+
+		String adomininf;
 
 		//バリデーションチェック
 		if (result.hasErrors()) {
@@ -780,9 +796,17 @@ public class UserController {
 		} else {
 		}
 
+		if (adomin == 1) {
+			adomininf = "管理者";
+		}else {
+			adomininf = "一般ユーザー";
+		}
+
+		user2.setAdomin(adomin);
 		user2.setName(user2.getName());
 		user2.setMailadd(user2.getMailadd());
 		model.addAttribute("user2", user2);
+		model.addAttribute("adomininf", adomininf);
 
 		return "NewUser";
 	}
@@ -796,10 +820,11 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/NewUserCreate", method = RequestMethod.POST)
 	public String NewUser( @ModelAttribute User2 user2, @ModelAttribute User user,
-			@RequestParam String name,@RequestParam String mailadd,BindingResult result, Model model) {
+			@RequestParam String name,@RequestParam String mailadd,@RequestParam int adomin,BindingResult result, Model model) {
 
 		user2.setName(name);
 		user2.setMailadd(mailadd);
+		user2.setAdomin(adomin);
 
 		// ユーザー情報の登録
 		userService.createU(user2);

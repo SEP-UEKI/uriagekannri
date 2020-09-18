@@ -19,9 +19,10 @@
 			 </tr>
 		</table>
 		</div>
-		<input type="submit"  value="案件一覧へ" style="color:#ffffff;background-color:#0000ff;" onclick="alert('案件一覧へ移動しますね');">
+		<input type="submit"  value="案件一覧へ" style="color:#ffffff;background-color:#0000ff;" onclick="alert('案件一覧へ移動します');">
 		<input type="hidden"  th:field="*{name}" th:value="${name}">
 		<input type="hidden"  th:field="*{mailadd}" th:value="${mailadd}">
+		<input type="hidden" name ="adomin" th:value="${adomin.adomin}">
 	</form>
 </body>
 </html>

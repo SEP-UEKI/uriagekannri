@@ -27,6 +27,12 @@
 				<span th:if="${#fields.hasErrors('mailadd')}" th:errors="*{mailadd}" style="color: red"></span></td>
 			</tr>
 		</div>
+		<tr>
+			<th class="cell_title">管理者権限</th>
+			<th class="cell_required">：</th>
+			<td><div th:each="item : ${radioItems}">
+				<input type="radio" name="adomin" th:value="${item.key}" th:text="${item.value}"/></div></td>
+		</tr>
 		</table>
 		<input type="submit"  value="ユーザー新規登録確認画面へ" class="btn">
 		<input type="button" onClick='history.back();' value="戻る">

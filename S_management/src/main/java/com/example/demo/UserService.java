@@ -274,6 +274,7 @@ public class UserService {
 
 		Cuser.setName(user2.getName());
 		Cuser.setMailadd(user2.getMailadd());
+		Cuser.setAdomin(user2.getAdomin());
 		Cuser.setDelete_flg(0);
 		userRepository2.save(Cuser);
 	  }

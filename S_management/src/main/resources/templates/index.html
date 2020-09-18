@@ -195,30 +195,71 @@ function getNow() {
     <input type="submit" name="newAdd" value="新規登録" style="WIDTH: 250px; HEIGHT: 20px" />
     <input type="hidden" name="newAddress" value="新規登録">
 </form>
+
+<!-- 管理者権限がある場合はそれぞれのボタンのリンクが繋がる -->
 <table>
+<span>
 <td>
+<a th:if="${user2.adomin == 1}">
 <form action="/clientall" th:object="${userRequest2}" th:method="get">
     <input type="submit" name="newclient" value="顧客管理画面へ" style="WIDTH: 250px; HEIGHT: 20px" />
     <input type="hidden" name="newclientname" value="顧客登録">
     <input type="hidden" name="mailadd" th:value="${loginmail}">
-    <input type="hidden" name="name" th:value="${loginusers}">
+    <input type="hidden" name="name" th:value="${loginusers}"></a>
 </form>
 </td>
+</span>
+
+<span>
 <td>
+<a th:if="${user2.adomin == 1}">
 <form action="/statusall" th:object="${userRequest3}" th:method="get">
     <input type="submit" name="newstatus" value="ステータス管理画面へ" style="WIDTH: 250px; HEIGHT: 20px" />
     <input type="hidden" name="mailadd" th:value="${loginmail}">
-    <input type="hidden" name="name" th:value="${loginusers}">
+    <input type="hidden" name="name" th:value="${loginusers}"></a>
 </form>
 </td>
+</span>
+
+<span>
 <td>
+<a th:if="${user2.adomin == 1}">
 <form action="/userall" th:object="${user}" th:method="get">
     <input type="submit" name="newuser" value="ユーザー管理画面へ" style="WIDTH: 250px; HEIGHT: 20px" />
     <input type="hidden" name="mailadd" th:value="${loginmail}">
-    <input type="hidden" name="name" th:value="${loginusers}">
+    <input type="hidden" name="name" th:value="${loginusers}"></a>
 </form>
 </td>
+</span>
 </table>
+
+<!-- 管理者権限が無い場合はボタンを押下後ポップアップが表示される -->
+<table>
+	<span>
+		<td>
+			<a th:if="${user2.adomin == 0}">
+			<button type="button" style="WIDTH: 150px; HEIGHT: 20px" onclick="alert('管理者権限が無いため表示できません');" >
+			<font size="2">顧客管理画面へ</font></button></a>
+		</td>
+	</span>
+
+	<span>
+		<td>
+			<a th:if="${user2.adomin == 0}">
+			<button type="button" style="WIDTH: 150px; HEIGHT: 20px" onclick="alert('管理者権限が無いため表示できません');">
+			<font size="2">ステータス管理画面</font></button></a>
+		</td>
+	</span>
+
+	<span>
+		<td>
+			<a th:if="${user2.adomin == 0}">
+			<button type="button" style="WIDTH: 150px; HEIGHT: 20px" onclick="alert('管理者権限が無いため表示できません');" >
+			<font size="2">ユーザー管理画面へ</font></button></a>
+		</td>
+	</span>
+</table>
+
 <table>
 <td>
 <form id="csvform" method="post" th:action="@{/download/csv}">
@@ -226,6 +267,7 @@ function getNow() {
     <button type="submit">CSVファイル出力</button>
 </form>
 </td>
+
 <td>
 <form id="csvform" method="post" th:action="@{/download/excel}">
     <input type="hidden" name="filename2"/>

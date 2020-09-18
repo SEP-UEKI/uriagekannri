@@ -65,7 +65,7 @@
     <input type="hidden" name="mailadd" th:value="${user.mailadd}">
     <input type="hidden" name="name" th:value="${loginusers}">
 </form>
-<form action="/forindex" th:object="${user}" th:method="get">
+<form action="/all2" th:object="${user}" th:method="get">
     <input type="submit" name="newclient" value="案件一覧へ" style="WIDTH: 250px; HEIGHT: 20px" />
     <input type="hidden" name="mailadd"  th:value="${user.mailadd}">
 </form>

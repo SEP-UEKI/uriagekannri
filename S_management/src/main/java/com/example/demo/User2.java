@@ -19,6 +19,7 @@ public class User2 {
     private String name;
     private String mailadd;
     private int delete_flg;
+    private int adomin;
 
     public long getId() {
         return id;
@@ -43,5 +44,11 @@ public class User2 {
     }
     public void setDelete_flg(int delete_flg) {
         this.delete_flg = delete_flg;
+    }
+    public int getAdomin() {
+        return adomin;
+    }
+    public void setAdomin(int adomin) {
+        this.adomin = adomin;
     }
 }
